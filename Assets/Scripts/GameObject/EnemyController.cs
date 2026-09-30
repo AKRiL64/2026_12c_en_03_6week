@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Windows;
 
 public class EnemyController : MonoBehaviour
+//TODO rename to Base EnemyController and create a derived class for each enemy type
 {
     private enum EnemyState
     {
