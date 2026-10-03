@@ -559,7 +559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cannon
   projectile: {fileID: 0}
   projectilesTag: Pullable
-  launchForce: 5
+  launchForce: 3
   launchedProjectileLayer: 8
   angleOffset: -90
 --- !u!1 &1984946006
