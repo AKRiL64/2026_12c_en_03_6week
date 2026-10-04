@@ -582,8 +582,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7e825c9d-8f34-4102-b743-b83a928d96dc"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Hold(duration=0.2)"",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Pull"",
@@ -593,8 +593,8 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""badef9d0-8bfd-4443-877f-5a0388efe670"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": ""Hold(duration=0.2)"",
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Pull"",

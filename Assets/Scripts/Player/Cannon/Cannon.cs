@@ -7,6 +7,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private string projectilesTag = "Pullable";
     [SerializeField] private float launchForce = 10;
+    [SerializeField] private float pullRadius = 10;
     
     private InputSystem_Actions _actions;
     private Vector2 _mousePosition;
@@ -32,7 +33,7 @@ public class Cannon : MonoBehaviour
 
     void TryPullObject(InputAction.CallbackContext ctx)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, _mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, _mousePosition, pullRadius);
 
         if (hit.collider != null && hit.collider.gameObject.CompareTag(projectilesTag))
         {
@@ -63,9 +64,17 @@ public class Cannon : MonoBehaviour
 
     private void LaunchProjectile()
     {
-        projectile.transform.position = transform.position;
+        PositionProjectile();
         projectile.SetActive(true);
         projectile.GetComponent<Projectile>().Launch(launchForce);
+    }
+
+    private void PositionProjectile()
+    {
+        projectile.transform.position = transform.position;
+        
+        projectile.transform.rotation *= Quaternion.FromToRotation(
+            projectile.transform.up, transform.up);
     }
 
     private void CatchProjectile(Collider2D other)
