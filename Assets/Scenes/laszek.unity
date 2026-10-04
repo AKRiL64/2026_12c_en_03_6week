@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 585752871}
   - component: {fileID: 585752872}
   - component: {fileID: 585752873}
+  - component: {fileID: 585752874}
   m_Layer: 0
   m_Name: Box
   m_TagString: Pullable
@@ -300,6 +301,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Follower
   target: {fileID: 0}
   speed: 4
+--- !u!114 &585752874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585752868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba324ccafb44e70afb60f045dd3dde4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FierceTooth
+  gravity: 1
+  defaultLayer: 0
+  launchedProjectileLayer: 8
 --- !u!1 &644039015
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,9 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cannon
   projectile: {fileID: 0}
   projectilesTag: Pullable
-  launchForce: 3
-  launchedProjectileLayer: 8
-  angleOffset: -90
+  launchForce: 10
 --- !u!1 &1984946006
 GameObject:
   m_ObjectHideFlags: 0

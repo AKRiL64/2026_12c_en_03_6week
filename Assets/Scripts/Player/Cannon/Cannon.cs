@@ -7,12 +7,9 @@ public class Cannon : MonoBehaviour
     [SerializeField] private GameObject projectile;
     [SerializeField] private string projectilesTag = "Pullable";
     [SerializeField] private float launchForce = 10;
-    [SerializeField] private int launchedProjectileLayer = 8;
     
     private InputSystem_Actions _actions;
     private Vector2 _mousePosition;
-    
-    [SerializeField] private float angleOffset = -90;
 
     void Awake()
     {
@@ -67,13 +64,8 @@ public class Cannon : MonoBehaviour
     private void LaunchProjectile()
     {
         projectile.transform.position = transform.position;
-        
-        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-        rb.bodyType = RigidbodyType2D.Dynamic;
-        
-        Vector2 direction = _mousePosition - (Vector2)transform.position;
         projectile.SetActive(true);
-        rb.AddForce(direction * launchForce * rb.mass, ForceMode2D.Impulse);
+        projectile.GetComponent<Projectile>().Launch(launchForce);
     }
 
     private void CatchProjectile(Collider2D other)
@@ -81,7 +73,6 @@ public class Cannon : MonoBehaviour
         GameObject proj = other.gameObject;
         proj.SetActive(false);
         proj.GetComponent<Follower>().enabled = false;
-        proj.layer = launchedProjectileLayer;
         projectile = proj;
         
         _actions.Player.Attack.Enable();
