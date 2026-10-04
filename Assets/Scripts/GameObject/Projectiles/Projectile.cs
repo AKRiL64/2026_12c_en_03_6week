@@ -32,6 +32,7 @@ public abstract class Projectile : MonoBehaviour
     private void SetupMetadata()
     {
         gameObject.layer = launchedProjectileLayer;
+        Rb.bodyType = RigidbodyType2D.Dynamic;
         Rb.gravityScale = gravity ? 1 : 0;
     }
     
