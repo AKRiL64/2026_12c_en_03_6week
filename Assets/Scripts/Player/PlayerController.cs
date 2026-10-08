@@ -4,6 +4,7 @@ public class PlayerController: MonoBehaviour
 {
     [SerializeField] private PlayerInputHandler input;
     [SerializeField] private BoxCollider2D playerCollider;
+    //TODO: change Rigidbody with Character Controller
     [SerializeField] private Rigidbody2D rb;
 
     [SerializeField] private float moveSpeed = 5f;
@@ -25,17 +26,9 @@ public class PlayerController: MonoBehaviour
     private float _jumpBufferTimer = JumpBufferTimeMax;
     
     //if both Coyote Time and Jump Input Buffer are sufficient - allows jump
-    private bool CanJump
-    {
-        get
-        {
-            if ((_jumpBufferTimer < JumpBufferTimeMax) && (_coyoteTimer < CoyoteTimeMax))
-            {
-                return true;
-            }   
-            return false;
-        }
-    }
+    private bool CanJump =>
+        _jumpBufferTimer < JumpBufferTimeMax &&
+        _coyoteTimer < CoyoteTimeMax;
 
     private void Update()
     {

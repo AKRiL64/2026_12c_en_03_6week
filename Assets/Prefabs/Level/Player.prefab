@@ -86,7 +86,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.26, y: 0.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -199,10 +199,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   input: {fileID: 4969271381316493594}
+  playerCollider: {fileID: 5139738832243297425}
   rb: {fileID: 2700115948072463015}
   moveSpeed: 5
   jumpForce: 6.5
-  playerCollider: {fileID: 5139738832243297425}
   groundCheckDistance: 0.05
   groundLayer:
     serializedVersion: 2
@@ -231,7 +231,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e25b0363a36b0ed4d893a6d1a61fea4c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
