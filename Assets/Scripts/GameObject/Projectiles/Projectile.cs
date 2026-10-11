@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour
         return direction.normalized;
     }
 
-    protected void SetupMetadata()
+    protected virtual void SetupMetadata()
     {
         gameObject.layer = launchedProjectileLayer;
         Rb.bodyType = RigidbodyType2D.Dynamic;
@@ -64,5 +64,6 @@ public class Projectile : MonoBehaviour
         Rb.linearVelocityX = 0;
         gameObject.layer = defaultLayer;
         IsLaunched = false;
+        Rb.gravityScale = 1;
     }
 }
