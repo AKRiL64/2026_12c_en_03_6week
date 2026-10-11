@@ -6,6 +6,8 @@ public class Follower : MonoBehaviour
     [SerializeField] public float speed = 1f;
     private Rigidbody2D _rb;
 
+    [SerializeField] private bool rotateTowardsTarget = true;
+    
     [SerializeField] private float rotationSpeed = 1f;
     private float _timeCount = 0;
     
@@ -24,7 +26,8 @@ public class Follower : MonoBehaviour
     {
         _rb.linearVelocity = GetDirection() * speed;
         
-        RotateTowardsTarget();
+        if (rotateTowardsTarget)
+            RotateTowardsTarget();
         _timeCount += Time.deltaTime;
     }
 
