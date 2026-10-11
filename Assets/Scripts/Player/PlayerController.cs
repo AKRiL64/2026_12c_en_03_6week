@@ -87,11 +87,11 @@ public class PlayerController: MonoBehaviour
         
         Vector2 groundCheckPoint = new Vector2(
             bounds.center.x,
-            bounds.min.y
+            bounds.min.y - groundCheckDistance / 2f
         );
 
         Vector2 groundCheckSize = new Vector2(
-            bounds.size.x,
+            bounds.size.x * 0.8f,
             groundCheckDistance
         );
 

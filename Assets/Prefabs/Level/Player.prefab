@@ -203,7 +203,7 @@ MonoBehaviour:
   rb: {fileID: 2700115948072463015}
   moveSpeed: 5
   jumpForce: 6.5
-  groundCheckDistance: 0.05
+  groundCheckDistance: 0.005
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
