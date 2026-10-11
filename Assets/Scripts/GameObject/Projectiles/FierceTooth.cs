@@ -21,9 +21,6 @@ public class FierceTooth : Projectile
 
     private IEnumerator RotateUpwards()
     {
-        while(Rb.linearVelocity != Vector2.zero)
-            yield return null;
-        
         for (float t = 0; t < 1; t += Time.deltaTime * rotationSpeed)
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, _upwardsRotation, t);
