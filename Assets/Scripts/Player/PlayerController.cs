@@ -10,7 +10,6 @@ public class PlayerController: MonoBehaviour
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float jumpForce = 6.5f;
 
-
     //For ground check
     [SerializeField] private float groundCheckDistance = 0.05f;
     [SerializeField] private LayerMask groundLayer;
@@ -19,6 +18,13 @@ public class PlayerController: MonoBehaviour
     [SerializeField] private float gravityModifierUp = 1.2f;
     [SerializeField] private float gravityModifierDown = 1.7f;
 
+    //Hp system
+    [SerializeField] private int MaxHp = 3;
+    private int _currentHp;
+    
+    //Spawning player on the last position he was on the ground in case of falling off into the water
+    private Vector2 _lastPosition;
+    
     private const float CoyoteTimeMax = 0.1f; //100ms
     private float _coyoteTimer = CoyoteTimeMax;
 
@@ -30,6 +36,12 @@ public class PlayerController: MonoBehaviour
         _jumpBufferTimer < JumpBufferTimeMax &&
         _coyoteTimer < CoyoteTimeMax;
 
+    private void Start()
+    {
+        _lastPosition = transform.position;
+        _currentHp = MaxHp;
+    }
+    
     private void Update()
     {
         //Applies speed in the move input direction
@@ -43,6 +55,9 @@ public class PlayerController: MonoBehaviour
 
         //Switches between different gravity modifiers based on Y movement direction
         ChangeGravityModifier();
+        
+        //Update last position on the ground
+        UpdateLastPosition();
     }
 
     private void Move()
@@ -55,6 +70,14 @@ public class PlayerController: MonoBehaviour
         }
         
         rb.linearVelocityX = directionX * moveSpeed;
+    }
+
+    private void UpdateLastPosition()
+    {
+        if (IsOnTheFloor())
+        {
+            _lastPosition =  transform.position;
+        }
     }
 
     private void UpdateBuffers()
@@ -123,5 +146,16 @@ public class PlayerController: MonoBehaviour
         {
             rb.gravityScale = gravityModifierUp;
         }
+    }
+
+    public void SpawnOnTheFloor()
+    {
+        rb.linearVelocityX = 0f;
+        rb.position = _lastPosition;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _currentHp -= damage;
     }
 }
