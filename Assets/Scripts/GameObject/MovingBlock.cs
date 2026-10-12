@@ -8,9 +8,31 @@ public class MovingBlock: MonoBehaviour, IPullable
     [SerializeField] private List<Axis> allowedAxises = new List<Axis>();
     [SerializeField] private Rigidbody2D rb;
     
-    public void Pull(PlayerController player, float force)
+    private void Awake()
     {
-        Vector2  direction = player.transform.position - transform.position;
+        ApplyAxisConstraints();
+    }
+    
+    private void ApplyAxisConstraints()
+    {
+        RigidbodyConstraints2D constraints = RigidbodyConstraints2D.None;
+
+        if (!allowedAxises.Contains(Axis.X))
+        {
+            constraints |= RigidbodyConstraints2D.FreezePositionX;
+        }
+
+        if (!allowedAxises.Contains(Axis.Y))
+        {
+            constraints |= RigidbodyConstraints2D.FreezePositionY;
+        }
+
+        rb.constraints = constraints;
+    }
+    
+    public void Pull(Cannon cannon, float force)
+    {
+        Vector2  direction = cannon.transform.position - transform.position;
         direction.Normalize();
         if (!allowedAxises.Contains(Axis.X))
         {

@@ -1,4 +1,4 @@
 ﻿public interface IPullable
 {
-    public void Pull(PlayerController player, float force);
+    public void Pull(Cannon cannon, float force);
 }

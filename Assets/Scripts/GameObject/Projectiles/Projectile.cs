@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] protected bool gravity = true;
+    [SerializeField] private string leverTag = "Lever";
     protected Rigidbody2D Rb;
 
     [SerializeField] protected int defaultLayer = 0;
@@ -51,6 +52,13 @@ public class Projectile : MonoBehaviour
 
     public virtual void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.gameObject.CompareTag(leverTag))
+        {
+            Lever lever = other.gameObject.GetComponent<Lever>();
+            if (lever == null) return;
+            
+            lever.NoConditionPull();
+        }
         Stop();
     }
 

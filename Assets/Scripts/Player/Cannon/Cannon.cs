@@ -9,12 +9,14 @@ public class Cannon : MonoBehaviour
     [SerializeField] private float launchForce = 10;
     [SerializeField] private float pullRadius = 10;
     
+    [SerializeField] private float pullForce = 10;
+    
     private InputSystem_Actions _actions;
     private Vector2 _mousePosition;
     
     private LayerMask _pullLayerMask;
     private Collider2D _collider;
-
+    
     void Awake()
     {
         _actions = new InputSystem_Actions();
@@ -48,7 +50,17 @@ public class Cannon : MonoBehaviour
         
         Debug.DrawRay(transform.position, mouseDirection, Color.red, 0.5f);
         
-        if (hit.collider != null && hit.collider.gameObject.CompareTag(projectilesTag))
+        if (hit.collider == null) return;
+        
+        IPullable pullable = hit.collider.GetComponent<IPullable>();
+
+        if (pullable != null)
+        {
+            pullable.Pull(this, pullForce);
+            return;
+        }
+        
+        if (hit.collider.gameObject.CompareTag(projectilesTag))
         {
             Debug.DrawRay(transform.position, hit.centroid, Color.green, 0.5f);
             projectile = hit.collider.gameObject;
