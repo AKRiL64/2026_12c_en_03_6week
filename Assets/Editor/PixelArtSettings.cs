@@ -8,7 +8,6 @@ public class PixelArtSettings
     [MenuItem("Tools/Pixel Art/Apply All Settings")]
     public static void ApplyAllSettings()
     {
-        int count = 0;
 
         string[] guids = AssetDatabase.FindAssets("t:Texture2D");
 
@@ -23,20 +22,15 @@ public class PixelArtSettings
                 continue;
 
             ti.filterMode = FilterMode.Point;
-            ti.textureCompression =
-                TextureImporterCompression.Uncompressed;
+            ti.textureCompression = TextureImporterCompression.Uncompressed;
             ti.mipmapEnabled = false;
             ti.spritePixelsPerUnit = 32;
             ti.maxTextureSize = 2048;
             ti.spriteImportMode = SpriteImportMode.Single;
             ti.SaveAndReimport();
-            count++;
         }
 
 
         AssetDatabase.SaveAssets();
-
-        Debug.Log(
-            $"Pixel Art Setup complete! Updated {count} sprites.");
     }
 }
