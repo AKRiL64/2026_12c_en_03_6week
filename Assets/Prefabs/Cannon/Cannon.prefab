@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.63123, z: 0}
-  m_LocalScale: {x: 0.73483, y: 0.56525385, z: 0.73483}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8490741975642584242}
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 32
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 8793639957104055765, guid: 913d851cf17d0354f8842b48ed94a631, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,7 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3567e4699cf1f7f4e821280d91af69f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CannonPositioner
-  angleOffset: -90
+  angleOffset: -180
+  spriteRenderer: {fileID: 535940681879991156}
 --- !u!1 &8572363509339914760
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,13 +134,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8572363509339914760}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.889, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -0.391, y: 0.004, z: 0}
+  m_LocalScale: {x: 0.45348027, y: 0.3394, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6795306731927940713}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &481282738709865606
 SpriteRenderer:
   serializedVersion: 2
@@ -148,7 +149,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8572363509339914760}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -261,3 +262,4 @@ MonoBehaviour:
   projectilesTag: Pullable
   launchForce: 20
   pullRadius: 10
+  pullForce: 10
