@@ -10,7 +10,6 @@ public class PixelArtSettings
     {
         int count = 0;
 
-        // Настройки всех спрайтов во всех папках
         string[] guids = AssetDatabase.FindAssets("t:Texture2D");
 
         foreach (string guid in guids)
