@@ -36,6 +36,8 @@ public class PlayerController: MonoBehaviour
         _jumpBufferTimer < JumpBufferTimeMax &&
         _coyoteTimer < CoyoteTimeMax;
 
+    public bool HasDownInput => input.InputVector.y < 0;
+    
     private void Start()
     {
         _lastPosition = transform.position;
