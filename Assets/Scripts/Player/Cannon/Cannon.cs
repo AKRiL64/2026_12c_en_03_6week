@@ -50,7 +50,7 @@ public class Cannon : MonoBehaviour
         Vector2 mouseDirection =  _mousePosition - (Vector2)transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, mouseDirection, pullRadius, _pullLayerMask);
         
-        Debug.DrawRay(transform.position, mouseDirection, Color.red, 0.5f);
+        //Debug.DrawRay(transform.position, mouseDirection, Color.red, 0.5f);
         
         if (hit.collider == null) return;
         
@@ -64,7 +64,7 @@ public class Cannon : MonoBehaviour
         
         if (hit.collider.gameObject.CompareTag(projectilesTag))
         {
-            Debug.DrawRay(transform.position, hit.centroid, Color.green, 0.5f);
+            //Debug.DrawRay(transform.position, hit.centroid, Color.green, 0.5f);
             projectile = hit.collider.gameObject;
             MoveObjectToCannon(hit);
             

@@ -174,8 +174,8 @@ MonoBehaviour:
   launchedProjectileLayer: 8
   flyDistance: 100
   explosionDistance: 1.5
-  explosionRadius: 5
-  explosionPower: 3
+  explosionRadius: 3
+  explosionPower: 5
   upwardsModifier: 1.5
   maxCollidersCount: 32
   affectedLayers:
@@ -1650,6 +1650,10 @@ PrefabInstance:
     - target: {fileID: 838608887245572404, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
       propertyPath: m_Name
       value: Key
+      objectReference: {fileID: 0}
+    - target: {fileID: 2033921193544257671, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5620966627820769005, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
       propertyPath: m_LocalPosition.x
