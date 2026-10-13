@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class DynamicCamera : MonoBehaviour
@@ -15,7 +16,6 @@ public class DynamicCamera : MonoBehaviour
     private Vector3 shakeOffset;
 
     private Camera mainCamera;
-
     private void Start()
     {
         mainCamera = Camera.main;
