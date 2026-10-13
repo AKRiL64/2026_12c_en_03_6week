@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 5272253455948872133}
   - component: {fileID: 4969271381316493594}
   - component: {fileID: 5139738832243297425}
+  - component: {fileID: 2884593294632474284}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -269,6 +270,21 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.9308421}
   m_EdgeRadius: 0
+--- !u!114 &2884593294632474284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3899163866016568888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14509ea928be62fa28bcc43b1a725eb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  score: 0
+  coinCounter: 0
+  diamondCounter: 0
 --- !u!1001 &1263158504177218450
 PrefabInstance:
   m_ObjectHideFlags: 0
