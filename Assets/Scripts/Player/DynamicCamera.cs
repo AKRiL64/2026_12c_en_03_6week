@@ -9,13 +9,19 @@ public class DynamicCamera : MonoBehaviour
     [SerializeField] private float dPlayer = 2;
     [SerializeField] private float dCamera = 8;
 
+    [SerializeField] private float smoothSpeed = 2;
+    private float shakeTimeRemaining;
+    private float shakeMagnitude;
+    private Vector3 shakeOffset;
+
     private Camera mainCamera;
-    
-    private void Start(){
+
+    private void Start()
+    {
         mainCamera = Camera.main;
     }
-    
-    private void Update()
+
+    private void LateUpdate()
     {
         if (!player || !mainCamera || Mouse.current == null) return;
 
@@ -32,6 +38,31 @@ public class DynamicCamera : MonoBehaviour
             Mathf.Clamp(cameraOffset.y, -maxOffset.y, maxOffset.y)
         );
 
-        transform.position = new Vector3(playerPos.x + cameraOffset.x, playerPos.y + cameraOffset.y, transform.position.z);
+        transform.position = Vector3.Lerp(
+            transform.position,
+            new Vector3(playerPos.x + cameraOffset.x,
+                        playerPos.y + cameraOffset.y,
+                        transform.position.z),
+            smoothSpeed * Time.deltaTime
+        );
+
+        if (shakeTimeRemaining > 0)
+        {
+            shakeOffset = UnityEngine.Random.insideUnitSphere * shakeMagnitude;
+            shakeTimeRemaining -= Time.deltaTime;
+        }
+        else
+        {
+            shakeOffset = Vector3.zero;
+        }
+
+        transform.position += shakeOffset;
+
+    }
+
+    public void ShakeCamera(float D, float M)
+    {
+        shakeTimeRemaining = D;
+        shakeMagnitude = M;
     }
 }
