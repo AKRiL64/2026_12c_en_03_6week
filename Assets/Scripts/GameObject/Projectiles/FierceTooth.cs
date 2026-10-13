@@ -16,6 +16,9 @@ public class FierceTooth : Projectile
     protected override void Stop()
     {
         base.Stop();
+        
+        if(!isActiveAndEnabled) return;
+        
         StartCoroutine(RotateUpwards());
     }
 

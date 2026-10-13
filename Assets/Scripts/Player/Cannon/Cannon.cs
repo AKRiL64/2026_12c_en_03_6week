@@ -17,6 +17,8 @@ public class Cannon : MonoBehaviour
     private LayerMask _pullLayerMask;
     private Collider2D _collider;
     
+    public event Action OnPullableRelease;
+    
     void Awake()
     {
         _actions = new InputSystem_Actions();
@@ -72,6 +74,8 @@ public class Cannon : MonoBehaviour
 
     void CancelPulling(InputAction.CallbackContext ctx)
     {
+        OnPullableRelease?.Invoke();
+        
         if (projectile != null)
         {
             Follower follower = projectile.GetComponent<Follower>();

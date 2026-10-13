@@ -8,9 +8,14 @@ public class MovingBlock: MonoBehaviour, IPullable
     [SerializeField] private List<Axis> allowedAxises = new List<Axis>();
     [SerializeField] private Rigidbody2D rb;
     
+    private Cannon pullingCannon;
+    private float pullingForce;
+    
     private void Awake()
     {
-        ApplyAxisConstraints();
+        RigidbodyConstraints2D constraints =
+            RigidbodyConstraints2D.FreezeRotation;
+        //ApplyAxisConstraints();
     }
     
     private void ApplyAxisConstraints()
@@ -32,18 +37,38 @@ public class MovingBlock: MonoBehaviour, IPullable
     
     public void Pull(Cannon cannon, float force)
     {
-        Vector2  direction = cannon.transform.position - transform.position;
-        direction.Normalize();
+        // Avoid duplicate subscriptions if Pull is called repeatedly.
+        if (pullingCannon != null) pullingCannon.OnPullableRelease -= StopPulling;
+        
+        pullingCannon = cannon;
+        pullingForce = force;
+
+        pullingCannon.OnPullableRelease += StopPulling;
+    }
+
+    private void StopPulling()
+    {
+        if (pullingCannon != null) pullingCannon.OnPullableRelease -= StopPulling;
+        pullingCannon = null;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!pullingCannon)
+            return;
+
+        Vector2 direction = (Vector2)pullingCannon.transform.position - rb.position;
+
         if (!allowedAxises.Contains(Axis.X))
-        {
             direction.x = 0;
-        }
 
         if (!allowedAxises.Contains(Axis.Y))
-        {
             direction.y = 0;
+
+        if (direction.sqrMagnitude > 0.001f)
+        {
+            direction.Normalize();
+            rb.linearVelocity = direction * pullingForce / rb.mass;
         }
-        
-        rb.AddForce(direction * force, ForceMode2D.Impulse);
     }
 }
