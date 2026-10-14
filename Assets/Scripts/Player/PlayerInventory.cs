@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] private int score = 0;
-    private readonly Dictionary<CoinType, int> _collectiblesCount = new Dictionary<CoinType, int>()
+    public int Score { get; private set; } = 0;
+    public readonly Dictionary<CoinType, int> CollectiblesCount = new Dictionary<CoinType, int>()
     {
         { CoinType.Coin, 0 }, { CoinType.Diamond, 0 }
     };
@@ -38,17 +38,21 @@ public class PlayerInventory : MonoBehaviour
         UpdateCollectibles(CoinType.Diamond, diamond ? 1 : 0);
     }
 
-    private void UpdateCollectibles(CoinType type, int delta)
+    public void UpdateCollectibles(CoinType type, int delta)
     {
         if (delta == 0)
             return;
-        CollectiblesEvents.CollectiblesChanged(type, _collectiblesCount[type], delta);
-        _collectiblesCount[type] += delta;
+        CollectiblesEvents.CollectiblesChanged(type, CollectiblesCount[type], delta);
+        CollectiblesCount[type] += delta;
         
         if(type == CoinType.Coin) // delete once the UI is ready
             coinCounter += delta;
         else if(type == CoinType.Diamond)
             diamondCounter += delta;
     }
-    
+
+    public void UpdateScore(int newScore)
+    {
+        Score = newScore;
+    }
 }
