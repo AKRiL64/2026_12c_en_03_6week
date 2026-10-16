@@ -19,6 +19,7 @@ public static class SaveManager
     }
     
     private static readonly string SaveDirectory = "Saves";
+    private const string DefaultFilename = "burmalda";
     private static ObjectManager _objectManager;
     private static PlayerInventory _playerInventory;
     
@@ -39,7 +40,7 @@ public static class SaveManager
         _objectManager = ObjectManager.Instance;
     }
 
-    public static bool Save([CanBeNull] string name, int checkpoint) // checkpoint number
+    public static bool Save(int checkpoint, string name = DefaultFilename) // checkpoint number
     {
         _score = (uint)_playerInventory.Score;
         _coins = (uint)_playerInventory.CollectiblesCount[CoinType.Coin];
@@ -158,13 +159,13 @@ public static class SaveManager
         return _objectStatus;
     }
     
-    public static bool Load(string filepath)
+    public static bool Load(string name = DefaultFilename)
     {
         _checksum = 0;
         _objectsMeta = 0;
         try
         {
-            using (BinaryReader reader = new BinaryReader(File.Open(SaveDirectory + "/" + filepath, FileMode.Open)))
+            using (BinaryReader reader = new BinaryReader(File.Open(SaveDirectory + "/" + name, FileMode.Open)))
             {
                 LoadPlayerStatus(reader);
                 LoadLevel(reader);

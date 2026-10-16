@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerController: MonoBehaviour 
 {
@@ -37,6 +38,8 @@ public class PlayerController: MonoBehaviour
         _coyoteTimer < CoyoteTimeMax;
 
     public bool HasDownInput => input.InputVector.y < 0;
+
+    [SerializeField] private string saveName = "savefile";
     
     private void Start()
     {
@@ -158,6 +161,10 @@ public class PlayerController: MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _currentHp -= damage;
+        _currentHp = Math.Clamp(_currentHp - damage, 0, MaxHp);
+        if (_currentHp <= 0)
+        {
+            SaveManager.Load(saveName);
+        }
     }
 }
