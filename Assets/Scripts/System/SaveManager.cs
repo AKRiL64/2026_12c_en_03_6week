@@ -9,9 +9,9 @@ public static class SaveManager
 {
     private record GObject
     {
-        public int Index { get; set; }
-        public int Exists { get; set; }
-        public int HasRb { get; set; }
+        public uint Index { get; set; }
+        public uint Exists { get; set; }
+        public uint HasRb { get; set; }
         public Vector3 Position { get; set; }
         public Vector3 Rotation { get; set; }
         public Vector2 LinearSpeed { get; set; }
@@ -25,7 +25,7 @@ public static class SaveManager
     private static ulong _checksum = 0,
         _objectsMeta = 0;
     private static char _levelCheckpoint;
-    private static int _score, _coins, _diamonds, _collectibles, _objectsNumber, _objectStatus, _level, _checkpoint;
+    private static uint _score, _coins, _diamonds, _collectibles, _objectsNumber, _objectStatus, _level, _checkpoint;
     private static GObject[] _objects;
     
 
@@ -41,9 +41,9 @@ public static class SaveManager
 
     public static bool Save([CanBeNull] string name, int checkpoint) // checkpoint number
     {
-        _score = _playerInventory.Score;
-        _coins = _playerInventory.CollectiblesCount[CoinType.Coin];
-        _diamonds = _playerInventory.CollectiblesCount[CoinType.Diamond];
+        _score = (uint)_playerInventory.Score;
+        _coins = (uint)_playerInventory.CollectiblesCount[CoinType.Coin];
+        _diamonds = (uint)_playerInventory.CollectiblesCount[CoinType.Diamond];
         
         char level = (char)(SceneManager.GetActiveScene().buildIndex);
         _levelCheckpoint = (char)((level << 4) | (char)checkpoint);
@@ -61,14 +61,11 @@ public static class SaveManager
                 WritePlayerStatus(writer);
                 writer.Write(_levelCheckpoint);
 
-                _objectsNumber = _objectManager.objects.Length;
+                _objectsNumber = (uint)_objectManager.objects.Length;
                 writer.Write(_objectsNumber);
 
                 for (int i = 0; i < _objectsNumber; i++)
-                    if (_objectManager.objects[i] != null)
-                        WriteObject(i, writer);
-                    else
-                        writer.Write(0);
+                    WriteObject(i, writer);
 
                 Debug.Log($"ObjectsMeta: {_objectsMeta}\tLevelCheckpoint:{(int)_levelCheckpoint}\tObjectsCount:{_objectsNumber}\t" +
                           $"Coins:{_coins}\tDiamonds:{_diamonds}\tScore:{_score}");
@@ -91,10 +88,18 @@ public static class SaveManager
     {
         _objectStatus = 0;
         GameObject obj = _objectManager.objects[index];
+        if (obj == null)
+        {
+            _objectStatus |= (uint)index;
+            _objectsMeta += (uint)_objectStatus;
+            writer.Write(_objectStatus);
+            return;
+        }
 
-        _objectStatus = GetObjectStatus(obj, index);
+        _objectStatus = (uint)GetObjectStatus(obj, index);
         writer.Write(_objectStatus);
-        _objectsMeta += (ulong)_objectStatus;
+        
+        _objectsMeta += (uint)_objectStatus;
 
         WriteTransform(obj, writer);
 
@@ -104,9 +109,9 @@ public static class SaveManager
 
     private static void WritePlayerStatus(BinaryWriter writer)
     {
-        _score = _playerInventory.Score;
-        _coins = _playerInventory.CollectiblesCount[CoinType.Coin];
-        _diamonds = _playerInventory.CollectiblesCount[CoinType.Diamond];
+        _score = (uint)_playerInventory.Score;
+        _coins = (uint)_playerInventory.CollectiblesCount[CoinType.Coin];
+        _diamonds = (uint)_playerInventory.CollectiblesCount[CoinType.Diamond];
         
         _collectibles = (_coins) | (_diamonds << 24);
         writer.Write(_score);
@@ -138,15 +143,13 @@ public static class SaveManager
         _objectsMeta += (ulong)(rb.linearVelocityX + rb.linearVelocityY + rb.angularVelocity);
     }
 
-    private static int GetObjectStatus(GameObject obj, int index)
+    private static uint GetObjectStatus(GameObject obj, int index)
     {
         _objectStatus = 0;
-        _objectStatus |= 1 << 31;
+        _objectStatus = (uint)(_objectStatus | (1 << 31));
         if (obj.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
-        {
             _objectStatus |= 1 << 30;
-            _objectStatus |= index;
-        }
+        _objectStatus |= (uint)index;
         return _objectStatus;
     }
     
@@ -161,10 +164,10 @@ public static class SaveManager
                 LoadPlayerStatus(reader);
                 LoadLevel(reader);
 
-                AsyncOperation sceneLoaded = SceneManager.LoadSceneAsync(_level);
+                AsyncOperation sceneLoaded = SceneManager.LoadSceneAsync((int)_level);
                 sceneLoaded.completed += OnSceneLoaded;
                 
-                _objectsNumber = reader.ReadInt32();
+                _objectsNumber = (uint)reader.ReadInt32();
                 _objects = new GObject[_objectsNumber];
                 
                 for (int i = 0; i < _objectsNumber; i++)
@@ -200,8 +203,8 @@ public static class SaveManager
 
     private static void LoadObject(BinaryReader reader)
     {
-        _objectStatus = reader.ReadInt32();
-        int exists = _objectStatus >> 31,
+        _objectStatus = (uint)reader.ReadInt32();
+        uint exists = _objectStatus >> 31,
             index = _objectStatus & 0x3FFFFFFF;
         _objectsMeta += (ulong)_objectStatus;
         
@@ -215,7 +218,7 @@ public static class SaveManager
         float posX = reader.ReadSingle(), posY = reader.ReadSingle(), posZ = reader.ReadSingle(),
             rotX = reader.ReadSingle(), rotY = reader.ReadSingle(), rotZ = reader.ReadSingle();
         
-        int hasRigidbody = (_objectStatus << 1) >> 31;
+        uint hasRigidbody = (_objectStatus << 1) >> 31;
         _objects[index] = new GObject()
         {
             Index = index, Exists = exists, HasRb = hasRigidbody,
@@ -238,15 +241,15 @@ public static class SaveManager
     private static void LoadLevel(BinaryReader reader)
     {
         _levelCheckpoint = reader.ReadChar();
-        _level = _levelCheckpoint >> 4;
+        _level = (uint)(_levelCheckpoint >> 4);
         Debug.Log($"Level to load: {_level}");
-        _checkpoint = _levelCheckpoint & 0xF;
+        _checkpoint = (uint)(_levelCheckpoint & 0xF);
     }
 
     private static void LoadPlayerStatus(BinaryReader reader)
     {
-        _score = reader.ReadInt32();
-        _collectibles = reader.ReadInt32();
+        _score = (uint)reader.ReadInt32();
+        _collectibles = (uint)reader.ReadInt32();
         _coins = _collectibles & 0xFFFFFF;
         _diamonds = _collectibles >> 24;
     }
@@ -263,9 +266,9 @@ public static class SaveManager
 
     private static void SetupPlayer()
     {
-        _playerInventory.UpdateScore(_score);
-        _playerInventory.UpdateCollectibles(CoinType.Coin, _coins);
-        _playerInventory.UpdateCollectibles(CoinType.Diamond, _diamonds);
+        _playerInventory.UpdateScore((int)_score);
+        _playerInventory.UpdateCollectibles(CoinType.Coin, (int)_coins);
+        _playerInventory.UpdateCollectibles(CoinType.Diamond, (int)_diamonds);
     }
     
     private static void SetupGameObjects()

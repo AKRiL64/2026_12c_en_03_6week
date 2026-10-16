@@ -1167,6 +1167,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ObjectManager
   objects:
   - {fileID: 2011106970}
+  - {fileID: 1966554188}
+  - {fileID: 1649240380}
 --- !u!4 &1748472274
 Transform:
   m_ObjectHideFlags: 0
@@ -1182,6 +1184,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1966554188 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1366586380576898601, guid: 887b0ebcc2daca0f9ac96e52419d02d8, type: 3}
+  m_PrefabInstance: {fileID: 895092020795514530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1984946006
 GameObject:
   m_ObjectHideFlags: 0
