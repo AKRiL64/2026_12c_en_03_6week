@@ -1165,6 +1165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdf4b8162a0c33635b10c167a6e4173f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectManager
+  objects:
+  - {fileID: 2011106970}
 --- !u!4 &1748472274
 Transform:
   m_ObjectHideFlags: 0
@@ -1317,6 +1319,11 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &2011106970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7290679828068225083, guid: c6b9dec9a03d0d95dab251b00d7e86ec, type: 3}
+  m_PrefabInstance: {fileID: 79321194781183977}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2084734128
 GameObject:
   m_ObjectHideFlags: 0

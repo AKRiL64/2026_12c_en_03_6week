@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class ObjectManager : MonoBehaviour
 {
-    [SerializeField] public readonly GameObject[] objects; // must be filled in Editor
+    [SerializeField] public GameObject[] objects; // must be filled in Editor
     
     public static ObjectManager Instance;
 
@@ -22,7 +22,7 @@ public class ObjectManager : MonoBehaviour
         objects[index] = null;
     }
 
-    public void DestroyObject(int index)
+    public void DestroyObjectN(int index)
     {
         if (objects[index] != null)
             Destroy(objects[index]);

@@ -1,20 +1,35 @@
 using System;
 using System.IO;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public static class SaveManager
 {
+    private record GObject
+    {
+        public int Index { get; set; }
+        public int Exists { get; set; }
+        public int HasRb { get; set; }
+        public Vector3 Position { get; set; }
+        public Vector3 Rotation { get; set; }
+        public Vector2 LinearSpeed { get; set; }
+        public float AngularSpeed { get; set; }
+    }
+    
     private static readonly string SaveDirectory = "Saves";
-    private static readonly int LevelZero = 1;
     private static ObjectManager _objectManager;
     private static PlayerInventory _playerInventory;
     
     private static ulong _checksum = 0,
-        _objectMeta = 0;
+        _objectsMeta = 0;
+    private static char _levelCheckpoint;
+    private static int _score, _coins, _diamonds, _collectibles, _objectsNumber, _objectStatus, _level, _checkpoint;
+    private static GObject[] _objects;
     
 
-    private static void SetPlayerInventory(PlayerInventory playerInventory)
+    public static void SetPlayerInventory(PlayerInventory playerInventory)
     {
         _playerInventory = playerInventory;
     }
@@ -24,41 +39,49 @@ public static class SaveManager
         _objectManager = ObjectManager.Instance;
     }
 
-    public static bool Save(int checkpoint) // checkpoint number
+    public static bool Save([CanBeNull] string name, int checkpoint) // checkpoint number
     {
-        int score = _playerInventory.Score, 
-            coins = _playerInventory.CollectiblesCount[CoinType.Coin],
-            diamonds = _playerInventory.CollectiblesCount[CoinType.Diamond];
+        _score = _playerInventory.Score;
+        _coins = _playerInventory.CollectiblesCount[CoinType.Coin];
+        _diamonds = _playerInventory.CollectiblesCount[CoinType.Diamond];
         
-        int level = (char)(SceneManager.GetActiveScene().buildIndex - LevelZero);
-        char levelCheckpoint = (char)((level << 4) | checkpoint);
+        char level = (char)(SceneManager.GetActiveScene().buildIndex);
+        _levelCheckpoint = (char)((level << 4) | (char)checkpoint);
+        Debug.Log($"Level to load: {level}");
         
-        _checksum = 0;
+        _objectsMeta = 0;
+        
+        string filepath = name == null ? SaveDirectory + "/" + DateTime.Now.Date : SaveDirectory + "/" + name;
 
         try
         {
             using (BinaryWriter writer =
-                   new BinaryWriter(File.Open(SaveDirectory + DateTime.Now.Date, FileMode.OpenOrCreate)))
+                   new BinaryWriter(File.Create(filepath)))
             {
                 WritePlayerStatus(writer);
-                writer.Write(levelCheckpoint);
+                writer.Write(_levelCheckpoint);
 
-                int objectsNumber = _objectManager.objects.Length;
-                writer.Write(objectsNumber);
+                _objectsNumber = _objectManager.objects.Length;
+                writer.Write(_objectsNumber);
 
-                for (int i = 0; i < objectsNumber; i++)
+                for (int i = 0; i < _objectsNumber; i++)
                     if (_objectManager.objects[i] != null)
                         WriteObject(i, writer);
                     else
                         writer.Write(0);
 
-                _checksum = _checksum * (ulong)(levelCheckpoint + objectsNumber + 1) + (ulong)(coins * (diamonds + 1) + score);
+                Debug.Log($"ObjectsMeta: {_objectsMeta}\tLevelCheckpoint:{(int)_levelCheckpoint}\tObjectsCount:{_objectsNumber}\t" +
+                          $"Coins:{_coins}\tDiamonds:{_diamonds}\tScore:{_score}");
+                
+                _checksum = _objectsMeta + (ulong)(_levelCheckpoint + _objectsNumber) + (ulong)(_coins * (_diamonds + 1) + _score);
                 writer.Write(_checksum);
+                
+                Debug.Log("Checksum Saved: " + _checksum);
             }
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message);
+            Debug.LogError(e.Message);
             return false;
         }
         return true;
@@ -66,11 +89,12 @@ public static class SaveManager
 
     private static void WriteObject(int index, BinaryWriter writer)
     {
-        int objectStatus = 0;
+        _objectStatus = 0;
         GameObject obj = _objectManager.objects[index];
 
-        objectStatus = GetObjectStatus(obj, index);
-        writer.Write(objectStatus);
+        _objectStatus = GetObjectStatus(obj, index);
+        writer.Write(_objectStatus);
+        _objectsMeta += (ulong)_objectStatus;
 
         WriteTransform(obj, writer);
 
@@ -80,13 +104,13 @@ public static class SaveManager
 
     private static void WritePlayerStatus(BinaryWriter writer)
     {
-        int score = _playerInventory.Score, 
-            coins = _playerInventory.CollectiblesCount[CoinType.Coin],
-            diamonds = _playerInventory.CollectiblesCount[CoinType.Diamond];
+        _score = _playerInventory.Score;
+        _coins = _playerInventory.CollectiblesCount[CoinType.Coin];
+        _diamonds = _playerInventory.CollectiblesCount[CoinType.Diamond];
         
-        int collectibles = (coins << 16) | diamonds;
-        writer.Write(score);
-        writer.Write(collectibles);
+        _collectibles = (_coins) | (_diamonds << 24);
+        writer.Write(_score);
+        writer.Write(_collectibles);
     }
 
     private static void WriteTransform(GameObject obj, BinaryWriter writer)
@@ -100,9 +124,9 @@ public static class SaveManager
         writer.Write(objTransform.rotation.eulerAngles.y);
         writer.Write(objTransform.rotation.eulerAngles.z);
 
-        _checksum += (ulong)(objTransform.position.x + objTransform.position.y + objTransform.position.z +
-                             objTransform.rotation.eulerAngles.x + objTransform.rotation.eulerAngles.y + 
-                             objTransform.rotation.eulerAngles.z);
+        _objectsMeta += (ulong)(objTransform.position.x + objTransform.position.y + objTransform.position.z +
+                               objTransform.rotation.eulerAngles.x + objTransform.rotation.eulerAngles.y + 
+                               objTransform.rotation.eulerAngles.z);
     }
 
     private static void WriteSpeed(Rigidbody2D rb, BinaryWriter writer)
@@ -111,109 +135,162 @@ public static class SaveManager
         writer.Write(rb.linearVelocityY);
         writer.Write(rb.angularVelocity);
         
-        _checksum += (ulong)(rb.linearVelocityX + rb.linearVelocityY + rb.angularVelocity);
+        _objectsMeta += (ulong)(rb.linearVelocityX + rb.linearVelocityY + rb.angularVelocity);
     }
 
     private static int GetObjectStatus(GameObject obj, int index)
     {
-        int objectStatus = 0;
-        objectStatus |= 1 << 31;
+        _objectStatus = 0;
+        _objectStatus |= 1 << 31;
         if (obj.TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
         {
-            objectStatus |= 1 << 30;
-            objectStatus |= index;
+            _objectStatus |= 1 << 30;
+            _objectStatus |= index;
         }
-        return objectStatus;
+        return _objectStatus;
     }
     
     public static bool Load(string filepath)
     {
         _checksum = 0;
-        _objectMeta = 0;
+        _objectsMeta = 0;
         try
         {
-            using (BinaryReader reader = new BinaryReader(File.Open(filepath, FileMode.Open)))
+            using (BinaryReader reader = new BinaryReader(File.Open(SaveDirectory + "/" + filepath, FileMode.Open)))
             {
-                LoadPlayerStatus(reader); // NOTE: player must be present on the scene(add the player to the main menu?)
+                LoadPlayerStatus(reader);
                 LoadLevel(reader);
-                UpdateObjectManager(ObjectManager.Instance);
+
+                AsyncOperation sceneLoaded = SceneManager.LoadSceneAsync(_level);
+                sceneLoaded.completed += OnSceneLoaded;
                 
-                int objectsNumber = reader.ReadInt32();
-                for (int i = 0; i < objectsNumber; i++)
+                _objectsNumber = reader.ReadInt32();
+                _objects = new GObject[_objectsNumber];
+                
+                for (int i = 0; i < _objectsNumber; i++)
                     LoadObject(reader);
                 
+                Debug.Log($"ObjectsMeta: {_objectsMeta}\tLevelCheckpoint:{(int)_levelCheckpoint}\tObjectsCount:{_objectsNumber}\t" +
+                          $"Coins:{_coins}\tDiamonds:{_diamonds}\tScore:{_score}");
+                
                 ulong checksum = reader.ReadUInt64();
+                _checksum = _objectsMeta + (ulong)(_levelCheckpoint + _objectsNumber) + (ulong)(_coins * (_diamonds + 1) + _score);
+                
+                Debug.Log($"Checksum Calculated: {_checksum}");
                 if (checksum != _checksum)
                 {
                     SceneManager.LoadScene(0);
+                    Debug.LogError("Checksum fail");
+                    Debug.Log($"Saved: {checksum}\tCalculated: {_checksum}");
                     return false;
                 }
+                
             }
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message);
+            Debug.LogError(e.Message);
             SceneManager.LoadScene(0);
+            Debug.LogError("Load fail");
             return false;
         }
+        Debug.Log("Load successful");
         return true;
     }
 
     private static void LoadObject(BinaryReader reader)
     {
-        int objectStatus = reader.ReadInt32(),
-            exists = objectStatus >> 31,
-            index = objectStatus & 0x3FFFFFFF;
-        _objectMeta += (ulong)objectStatus;
+        _objectStatus = reader.ReadInt32();
+        int exists = _objectStatus >> 31,
+            index = _objectStatus & 0x3FFFFFFF;
+        _objectsMeta += (ulong)_objectStatus;
         
-        GameObject obj = _objectManager.objects[index];
+        Debug.Log($"Exists: {exists}");
         if (exists == 0)
         {
-            obj.SetActive(false);
+            _objects[index] = new GObject() {Index = index, Exists = exists}; 
             return;
         }
-        
+
         float posX = reader.ReadSingle(), posY = reader.ReadSingle(), posZ = reader.ReadSingle(),
             rotX = reader.ReadSingle(), rotY = reader.ReadSingle(), rotZ = reader.ReadSingle();
-
-        obj.transform.position = new Vector3(posX, posY, posZ);
-        obj.transform.rotation = Quaternion.Euler(rotX, rotY, rotZ);
         
-        int hasRigidbody = (objectStatus << 1) >> 31;
+        int hasRigidbody = (_objectStatus << 1) >> 31;
+        _objects[index] = new GObject()
+        {
+            Index = index, Exists = exists, HasRb = hasRigidbody,
+            Position = new Vector3(posX, posY, posZ),  Rotation = new Vector3(rotX, rotY, rotZ)
+        };
+        
         if (hasRigidbody == 1)
         {
-            Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-            float linearSpeedX = reader.ReadSingle(), linearSpeedY = reader.ReadSingle(), 
-                angularSpeed = reader.ReadSingle();
-            rb.linearVelocity = new Vector2(linearSpeedX, linearSpeedY);
-            rb.angularVelocity = angularSpeed;
-            
-            _checksum += (ulong)(posX + posY + posZ + rotX + rotY + rotZ + linearSpeedX + linearSpeedY + angularSpeed);
+            float linearSpeedX = reader.ReadSingle(), 
+                  linearSpeedY = reader.ReadSingle(), 
+                  angularSpeed = reader.ReadSingle();
+            _objects[index].LinearSpeed = new Vector2(linearSpeedX, linearSpeedY);
+            _objects[index].AngularSpeed = angularSpeed;
+            _objectsMeta += (ulong)(posX + posY + posZ + rotX + rotY + rotZ + linearSpeedX + linearSpeedY + angularSpeed);
         }
         else
-            _checksum += (ulong)(posX + posY + posZ + rotX + rotY + rotZ);
+            _objectsMeta += (ulong)(posX + posY + posZ + rotX + rotY + rotZ);
     }
 
     private static void LoadLevel(BinaryReader reader)
     {
-        char levelCheckpoint = reader.ReadChar();
-        int level = levelCheckpoint >> 4;
-        int checkpoint = levelCheckpoint & 0xF;
-
-        _checksum += (ulong)(levelCheckpoint + 1);
-        
-        SceneManager.LoadScene(level);
-        // call some checkpoint manager to move the player
+        _levelCheckpoint = reader.ReadChar();
+        _level = _levelCheckpoint >> 4;
+        Debug.Log($"Level to load: {_level}");
+        _checkpoint = _levelCheckpoint & 0xF;
     }
 
     private static void LoadPlayerStatus(BinaryReader reader)
     {
-        _playerInventory.UpdateScore(reader.ReadInt32());
-        int collectibles = reader.ReadInt32();
-        int coins = collectibles & 0xFFFFFF;
-        int diamonds = collectibles >> 16;
-        _checksum = (ulong)(coins * (diamonds + 1));
-        _playerInventory.UpdateCollectibles(CoinType.Coin, coins);
-        _playerInventory.UpdateCollectibles(CoinType.Diamond, diamonds);
+        _score = reader.ReadInt32();
+        _collectibles = reader.ReadInt32();
+        _coins = _collectibles & 0xFFFFFF;
+        _diamonds = _collectibles >> 24;
+    }
+    
+    private static void OnSceneLoaded(AsyncOperation op)
+    {
+        Debug.Log("Loaded: " + SceneManager.GetActiveScene().name);
+        UpdateObjectManager(ObjectManager.Instance);
+        
+        SetupPlayer();
+        // call some checkpoint manager to move the player
+        SetupGameObjects();
+    }
+
+    private static void SetupPlayer()
+    {
+        _playerInventory.UpdateScore(_score);
+        _playerInventory.UpdateCollectibles(CoinType.Coin, _coins);
+        _playerInventory.UpdateCollectibles(CoinType.Diamond, _diamonds);
+    }
+    
+    private static void SetupGameObjects()
+    {
+        for (int i = 0; i < _objectsNumber; i++)
+        {
+            GObject savedObj = _objects[i];
+            Debug.Log(savedObj.Index);
+            GameObject obj = _objectManager.objects[savedObj.Index];
+
+            if (savedObj.Exists == 0)
+            {
+                _objectManager.DestroyObjectN(i);
+                continue;
+            }
+            
+            obj.transform.position = savedObj.Position;
+            obj.transform.rotation = Quaternion.Euler(savedObj.Rotation);
+
+            if (savedObj.HasRb == 1)
+            {
+                Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+                rb.linearVelocity =  savedObj.LinearSpeed;
+                rb.angularVelocity =  savedObj.AngularSpeed;
+            }
+        }
     }
 }
