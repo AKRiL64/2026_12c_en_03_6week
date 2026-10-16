@@ -50,9 +50,10 @@ public static class SaveManager
         Debug.Log($"Level to load: {level}");
         
         _objectsMeta = 0;
-        
-        string filepath = name == null ? SaveDirectory + "/" + DateTime.Now.Date : SaveDirectory + "/" + name;
 
+        Directory.CreateDirectory(SaveDirectory);
+        string filepath = name == null ? SaveDirectory + "/" + DateTime.Now.Date : SaveDirectory + "/" + name;
+        
         try
         {
             using (BinaryWriter writer =
@@ -128,10 +129,13 @@ public static class SaveManager
         writer.Write(objTransform.rotation.eulerAngles.x);
         writer.Write(objTransform.rotation.eulerAngles.y);
         writer.Write(objTransform.rotation.eulerAngles.z);
-
-        _objectsMeta += (ulong)(objTransform.position.x + objTransform.position.y + objTransform.position.z +
-                               objTransform.rotation.eulerAngles.x + objTransform.rotation.eulerAngles.y + 
-                               objTransform.rotation.eulerAngles.z);
+        
+        AddFloatToMeta(objTransform.position.x); 
+        AddFloatToMeta(objTransform.position.y); 
+        AddFloatToMeta(objTransform.position.z);
+        AddFloatToMeta(objTransform.rotation.eulerAngles.x); 
+        AddFloatToMeta(objTransform.rotation.eulerAngles.y); 
+        AddFloatToMeta(objTransform.rotation.eulerAngles.z);
     }
 
     private static void WriteSpeed(Rigidbody2D rb, BinaryWriter writer)
@@ -140,7 +144,8 @@ public static class SaveManager
         writer.Write(rb.linearVelocityY);
         writer.Write(rb.angularVelocity);
         
-        _objectsMeta += (ulong)(rb.linearVelocityX + rb.linearVelocityY + rb.angularVelocity);
+        AddFloatToMeta(rb.linearVelocityX); AddFloatToMeta(rb.linearVelocityY);
+        AddFloatToMeta(rb.angularVelocity);
     }
 
     private static uint GetObjectStatus(GameObject obj, int index)
@@ -163,9 +168,6 @@ public static class SaveManager
             {
                 LoadPlayerStatus(reader);
                 LoadLevel(reader);
-
-                AsyncOperation sceneLoaded = SceneManager.LoadSceneAsync((int)_level);
-                sceneLoaded.completed += OnSceneLoaded;
                 
                 _objectsNumber = (uint)reader.ReadInt32();
                 _objects = new GObject[_objectsNumber];
@@ -182,7 +184,7 @@ public static class SaveManager
                 Debug.Log($"Checksum Calculated: {_checksum}");
                 if (checksum != _checksum)
                 {
-                    SceneManager.LoadScene(0);
+                    //SceneManager.LoadScene(0); TODO: REMEMBER
                     Debug.LogError("Checksum fail");
                     Debug.Log($"Saved: {checksum}\tCalculated: {_checksum}");
                     return false;
@@ -197,6 +199,8 @@ public static class SaveManager
             Debug.LogError("Load fail");
             return false;
         }
+        AsyncOperation sceneLoaded = SceneManager.LoadSceneAsync((int)_level);
+        sceneLoaded.completed += OnSceneLoaded;
         Debug.Log("Load successful");
         return true;
     }
@@ -224,6 +228,8 @@ public static class SaveManager
             Index = index, Exists = exists, HasRb = hasRigidbody,
             Position = new Vector3(posX, posY, posZ),  Rotation = new Vector3(rotX, rotY, rotZ)
         };
+        AddFloatToMeta(posX); AddFloatToMeta(posY); AddFloatToMeta(posZ);
+        AddFloatToMeta(rotX); AddFloatToMeta(rotY); AddFloatToMeta(rotZ);
         
         if (hasRigidbody == 1)
         {
@@ -232,10 +238,9 @@ public static class SaveManager
                   angularSpeed = reader.ReadSingle();
             _objects[index].LinearSpeed = new Vector2(linearSpeedX, linearSpeedY);
             _objects[index].AngularSpeed = angularSpeed;
-            _objectsMeta += (ulong)(posX + posY + posZ + rotX + rotY + rotZ + linearSpeedX + linearSpeedY + angularSpeed);
+            AddFloatToMeta(linearSpeedX); AddFloatToMeta(linearSpeedY); 
+            AddFloatToMeta(angularSpeed);
         }
-        else
-            _objectsMeta += (ulong)(posX + posY + posZ + rotX + rotY + rotZ);
     }
 
     private static void LoadLevel(BinaryReader reader)
@@ -281,7 +286,7 @@ public static class SaveManager
 
             if (savedObj.Exists == 0)
             {
-                _objectManager.DestroyObjectN(i);
+                _objectManager.DestroyObjectN((int)savedObj.Index);
                 continue;
             }
             
@@ -296,4 +301,7 @@ public static class SaveManager
             }
         }
     }
+    
+    private static void AddFloatToMeta(float value) => 
+        _objectsMeta += unchecked((uint)BitConverter.SingleToInt32Bits(value));
 }
