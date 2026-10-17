@@ -28,6 +28,8 @@ public static class SaveManager
     private static char _levelCheckpoint;
     private static uint _score, _coins, _diamonds, _collectibles, _objectsNumber, _objectStatus, _level, _checkpoint;
     private static GObject[] _objects;
+
+    public static string SaveFilename = DefaultFilename;
     
 
     public static void SetPlayerInventory(PlayerInventory playerInventory)
@@ -185,7 +187,7 @@ public static class SaveManager
                 Debug.Log($"Checksum Calculated: {_checksum}");
                 if (checksum != _checksum)
                 {
-                    //SceneManager.LoadScene(0); TODO: REMEMBER
+                    SceneManager.LoadScene(0);
                     Debug.LogError("Checksum fail");
                     Debug.Log($"Saved: {checksum}\tCalculated: {_checksum}");
                     return false;
@@ -200,6 +202,7 @@ public static class SaveManager
             Debug.LogError("Load fail");
             return false;
         }
+        CheckpointManager.WipeCheckpoints();
         AsyncOperation sceneLoaded = SceneManager.LoadSceneAsync((int)_level);
         sceneLoaded.completed += OnSceneLoaded;
         Debug.Log("Load successful");
@@ -246,6 +249,7 @@ public static class SaveManager
 
     private static void LoadLevel(BinaryReader reader)
     {
+        Checkpoint.ResetCheckpoint();
         _levelCheckpoint = reader.ReadChar();
         _level = (uint)(_levelCheckpoint >> 4);
         Debug.Log($"Level to load: {_level}");
@@ -266,7 +270,7 @@ public static class SaveManager
         UpdateObjectManager(ObjectManager.Instance);
         
         SetupPlayer();
-        // call some checkpoint manager to move the player
+        CheckpointManager.PutPlayerOnCheckpoint((int)_checkpoint);
         SetupGameObjects();
     }
 

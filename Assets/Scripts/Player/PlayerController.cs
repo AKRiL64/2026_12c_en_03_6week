@@ -39,8 +39,11 @@ public class PlayerController: MonoBehaviour
 
     public bool HasDownInput => input.InputVector.y < 0;
 
-    [SerializeField] private string saveName = "savefile";
-    
+    private void Awake()
+    {
+        CheckpointManager.SetPlayer(gameObject);
+    }
+
     private void Start()
     {
         _lastPosition = transform.position;
@@ -164,7 +167,7 @@ public class PlayerController: MonoBehaviour
         _currentHp = Math.Clamp(_currentHp - damage, 0, MaxHp);
         if (_currentHp <= 0)
         {
-            SaveManager.Load(saveName);
+            SaveManager.Load(SaveManager.SaveFilename);
         }
     }
 }
