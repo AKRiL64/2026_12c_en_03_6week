@@ -9,8 +9,7 @@ public class PlayerInventory : MonoBehaviour
         { CoinType.Coin, 0 }, { CoinType.Diamond, 0 }
     };
 
-    [SerializeField] private int coinCounter = 0; // delete once the UI is ready
-    [SerializeField] private int diamondCounter = 0;
+    [SerializeField] private CoinBar coinBar;
 
     void OnEnable()
     {
@@ -45,10 +44,10 @@ public class PlayerInventory : MonoBehaviour
         CollectiblesEvents.CollectiblesChanged(type, _collectiblesCount[type], delta);
         _collectiblesCount[type] += delta;
         
-        if(type == CoinType.Coin) // delete once the UI is ready
-            coinCounter += delta;
-        else if(type == CoinType.Diamond)
-            diamondCounter += delta;
+        if(type == CoinType.Coin)
+            coinBar.UpdateBar(_collectiblesCount[type]);
+        //else if(type == CoinType.Diamond)
+            //diamondCounter += delta;
     }
     
 }
