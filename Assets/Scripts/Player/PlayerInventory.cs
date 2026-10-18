@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerInventory : MonoBehaviour
     };
 
     [SerializeField] private CoinBar coinBar;
+    [SerializeField] private DiamondCounter diamondCounter;
 
     void OnEnable()
     {
@@ -43,11 +45,17 @@ public class PlayerInventory : MonoBehaviour
             return;
         CollectiblesEvents.CollectiblesChanged(type, _collectiblesCount[type], delta);
         _collectiblesCount[type] += delta;
-        
-        if(type == CoinType.Coin)
-            coinBar.UpdateBar(_collectiblesCount[type]);
-        //else if(type == CoinType.Diamond)
-            //diamondCounter += delta;
+
+
+        switch (type)
+        {
+            case CoinType.Coin:
+                coinBar.UpdateBar(_collectiblesCount[type]);
+                break;
+            case CoinType.Diamond:
+                diamondCounter.SetCounter(_collectiblesCount[type]);
+                break;
+        }
     }
     
 }
