@@ -203,8 +203,13 @@ public static class SaveManager
             return false;
         }
         CheckpointManager.WipeCheckpoints();
+        
+        StatusPersister.SaveScore((int)_score);
+        StatusPersister.SaveCollectibles((int)_coins, (int)_diamonds);
+        
         AsyncOperation sceneLoaded = SceneManager.LoadSceneAsync((int)_level);
         sceneLoaded.completed += OnSceneLoaded;
+        
         Debug.Log("Load successful");
         return true;
     }

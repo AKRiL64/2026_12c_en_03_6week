@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +10,6 @@ public class PlayerInventory : MonoBehaviour
         { CoinType.Coin, 0 }, { CoinType.Diamond, 0 }
     };
 
-    [SerializeField] private int coinCounter = 0; // delete once the UI is ready
-    [SerializeField] private int diamondCounter = 0;
-
     void OnEnable()
     {
         CollectiblesEvents.OnCoinCollected += CollectCoin;
@@ -22,6 +20,17 @@ public class PlayerInventory : MonoBehaviour
     {
         CollectiblesEvents.OnCoinCollected -= CollectCoin;
         CollectiblesEvents.OnChestOpened -= CollectChest;
+    }
+
+    void OnDestroy()
+    {
+        StatusPersister.SaveScore(Score);
+        StatusPersister.SaveCollectibles(CollectiblesCount);
+    }
+
+    private void Awake()
+    {
+        GetCollectibles();
     }
 
     private void CollectCoin(CoinType type)
@@ -44,15 +53,20 @@ public class PlayerInventory : MonoBehaviour
             return;
         CollectiblesEvents.CollectiblesChanged(type, CollectiblesCount[type], delta);
         CollectiblesCount[type] += delta;
-        
-        if(type == CoinType.Coin) // delete once the UI is ready
-            coinCounter += delta;
-        else if(type == CoinType.Diamond)
-            diamondCounter += delta;
+        Debug.Log($"{type}: {CollectiblesCount[type]}");
     }
 
     public void UpdateScore(int newScore)
     {
         Score = newScore;
+    }
+
+    private void GetCollectibles()
+    {
+        Score = StatusPersister.Score;
+        CollectiblesCount[CoinType.Coin] = StatusPersister.CollectiblesCount[CoinType.Coin];
+        CollectiblesCount[CoinType.Diamond] = StatusPersister.CollectiblesCount[CoinType.Diamond];
+        
+        Debug.Log($"{Score} - {CollectiblesCount[CoinType.Coin]} -  {CollectiblesCount[CoinType.Diamond]}");
     }
 }
