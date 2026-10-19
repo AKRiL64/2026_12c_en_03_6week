@@ -44,6 +44,7 @@ public class Cannon : MonoBehaviour
         _actions.Player.Pull.started -= TryPullObject;
         _actions.Player.Pull.canceled -= CancelPulling;
         _actions.Player.Attack.performed -= Shoot;
+        _actions.Player.Disable();
     }
 
     void TryPullObject(InputAction.CallbackContext ctx)
