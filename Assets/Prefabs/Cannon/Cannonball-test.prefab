@@ -108,6 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CannonBall
   gravity: 1
+  leverTag: Lever
   defaultLayer: 0
   launchedProjectileLayer: 8
   flyDistance: 100

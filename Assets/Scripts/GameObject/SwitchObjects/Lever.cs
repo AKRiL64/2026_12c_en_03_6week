@@ -13,6 +13,9 @@ public class Lever : MonoBehaviour, IPullable
     [SerializeField] private LeverPosition leverPosition = LeverPosition.Left;
 
     [SerializeField] private int activateDegree = 60;
+    [SerializeField] private bool isOneTime = false;
+    
+    private bool wasPulled = false;
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class Lever : MonoBehaviour, IPullable
     
     private void ChangePosition()
     {
+        wasPulled = true;
         if (leverPosition == LeverPosition.Left)
         {
             leverPosition = LeverPosition.Right;
@@ -47,6 +51,8 @@ public class Lever : MonoBehaviour, IPullable
 
     public void NoConditionPull()
     {
+        if (wasPulled && isOneTime) return;
+        
         ChangePosition();
         SyncPosition();
         OnLeverSwitch?.Invoke();
@@ -54,6 +60,8 @@ public class Lever : MonoBehaviour, IPullable
 
     public void Pull(Cannon cannon, float force)
     {
+        if (wasPulled && isOneTime) return;
+        
         Vector2 localPlayerPosition = transform.InverseTransformPoint(cannon.transform.position);
 
         if (leverPosition == LeverPosition.Left && localPlayerPosition.x <= 0f)

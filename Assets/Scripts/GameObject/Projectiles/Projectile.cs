@@ -33,6 +33,12 @@ public class Projectile : MonoBehaviour
         Rb.AddForce(GetDirection() * launchForce * Rb.mass, ForceMode2D.Impulse);
     }
 
+    public virtual void Launch(float launchForce, Vector2 direction)
+    {
+        SetupMetadata();
+        Rb.AddForce(direction * launchForce * Rb.mass, ForceMode2D.Impulse);
+    }
+
     protected virtual Vector2 GetDirection()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -73,5 +79,14 @@ public class Projectile : MonoBehaviour
         gameObject.layer = defaultLayer;
         IsLaunched = false;
         Rb.gravityScale = 1;
+    }
+
+    public virtual void StartSwallowing()
+    {
+        IsLaunched = false;
+        gameObject.layer = defaultLayer;
+        Rb.linearVelocity = Vector2.zero;
+        Rb.gravityScale = 1;
+        
     }
 }

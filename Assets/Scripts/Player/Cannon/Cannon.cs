@@ -99,9 +99,22 @@ public class Cannon : MonoBehaviour
         _actions.Player.Pull.canceled += CancelPulling;
     }
 
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.CompareTag(projectilesTag) && other.gameObject == projectile)
+    //         CatchProjectile(other);
+    // }
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag(projectilesTag))
+            Debug.Log($"Still overlapping: {other.name}");
+    }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(projectilesTag) && other.gameObject == projectile)
+        Debug.Log($"Cannon trigger entered by: {other.name}, tag: {other.tag}");
+        
+        if (other.CompareTag(projectilesTag))
             CatchProjectile(other);
     }
 
@@ -136,6 +149,10 @@ public class Cannon : MonoBehaviour
     private void MoveObjectToCannon(RaycastHit2D hit)
     {
         _collider.enabled = true;
+        
+        Projectile proj = hit.collider.GetComponent<Projectile>();
+        if (proj != null)
+            proj.StartSwallowing();
         
         Follower follower = hit.collider.gameObject.GetComponent<Follower>();
         follower.target = gameObject;

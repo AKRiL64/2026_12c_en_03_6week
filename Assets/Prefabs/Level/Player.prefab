@@ -298,6 +298,10 @@ PrefabInstance:
       value: Cannon
       objectReference: {fileID: 0}
     - target: {fileID: 6795306731927940713, guid: 70f91343c4f86a83ca361facd4e214d2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795306731927940713, guid: 70f91343c4f86a83ca361facd4e214d2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
