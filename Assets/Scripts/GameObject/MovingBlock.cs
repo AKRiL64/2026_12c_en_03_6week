@@ -13,8 +13,6 @@ public class MovingBlock: MonoBehaviour, IPullable
     
     private void Awake()
     {
-        RigidbodyConstraints2D constraints =
-            RigidbodyConstraints2D.FreezeRotation;
         //ApplyAxisConstraints();
     }
     

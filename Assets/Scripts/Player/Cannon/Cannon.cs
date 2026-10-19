@@ -16,7 +16,8 @@ public class Cannon : MonoBehaviour
     
     private LayerMask _pullLayerMask;
     private Collider2D _collider;
-    
+
+    private DynamicCamera dynamicCamera;
     public event Action OnPullableRelease;
     
     void Awake()
@@ -28,6 +29,7 @@ public class Cannon : MonoBehaviour
         _pullLayerMask = ~LayerMask.GetMask("Player");
         if(_collider == null)
             _collider = GetComponent<Collider2D>();
+        dynamicCamera = Camera.main.GetComponent<DynamicCamera>();
     }
 
     void OnEnable()
@@ -46,11 +48,13 @@ public class Cannon : MonoBehaviour
 
     void TryPullObject(InputAction.CallbackContext ctx)
     {
+        //TODO replace with an event OR make camera static (or leave like this its not too bad)
+        dynamicCamera.ShakeCamera(0.3f, 0.05f);
         _mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         Vector2 mouseDirection =  _mousePosition - (Vector2)transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, mouseDirection, pullRadius, _pullLayerMask);
         
-        Debug.DrawRay(transform.position, mouseDirection, Color.red, 0.5f);
+        //Debug.DrawRay(transform.position, mouseDirection, Color.red, 0.5f);
         
         if (hit.collider == null) return;
         
@@ -59,12 +63,13 @@ public class Cannon : MonoBehaviour
         if (pullable != null)
         {
             pullable.Pull(this, pullForce);
+
             return;
         }
         
         if (hit.collider.gameObject.CompareTag(projectilesTag))
         {
-            Debug.DrawRay(transform.position, hit.centroid, Color.green, 0.5f);
+            //Debug.DrawRay(transform.position, hit.centroid, Color.green, 0.5f);
             projectile = hit.collider.gameObject;
             MoveObjectToCannon(hit);
             

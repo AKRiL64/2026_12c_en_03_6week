@@ -47,10 +47,10 @@ public class Gunpowder : Projectile
         {
             if (_colliders[i].TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
             {
-                Debug.DrawLine(explosionPosition, _colliders[i].transform.position, Color.red, 1.5f);
-                Vector2 direction = (_colliders[i].transform.position - transform.position).normalized; 
+                //Debug.DrawLine(explosionPosition, _colliders[i].transform.position, Color.red, 1.5f);
+                Vector2 direction = ((Vector2)_colliders[i].transform.position - explosionPosition).normalized; 
                 direction *= explosionPower;
-                direction.y *= -upwardsModifier; // it's 04:08 idk why do you need to multiply by negative it shouldn't but it works this way 
+                direction.y *= upwardsModifier; 
                 rb.AddForce(direction, ForceMode2D.Impulse);
             }
         }
