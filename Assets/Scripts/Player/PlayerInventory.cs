@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +9,15 @@ public class PlayerInventory : MonoBehaviour
         { CoinType.Coin, 0 }, { CoinType.Diamond, 0 }
     };
 
+    [SerializeField] private CoinBar coinBar;
+    [SerializeField] private DiamondCounter diamondCounter;
+
+    void Awake()
+    {
+        coinBar = CoinBar.Instance;
+        diamondCounter = DiamondCounter.Instance;
+    }
+    
     void OnEnable()
     {
         CollectiblesEvents.OnCoinCollected += CollectCoin;
@@ -53,12 +61,17 @@ public class PlayerInventory : MonoBehaviour
             return;
         CollectiblesEvents.CollectiblesChanged(type, CollectiblesCount[type], delta);
         CollectiblesCount[type] += delta;
-        Debug.Log($"{type}: {CollectiblesCount[type]}");
-    }
 
-    public void UpdateScore(int newScore)
-    {
-        Score = newScore;
+
+        switch (type)
+        {
+            case CoinType.Coin:
+                coinBar.UpdateBar(CollectiblesCount[type]);
+                break;
+            case CoinType.Diamond:
+                diamondCounter.SetCounter(CollectiblesCount[type]);
+                break;
+        }
     }
 
     private void GetCollectibles()
