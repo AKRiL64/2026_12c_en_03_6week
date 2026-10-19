@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using FMODUnity;
 
 public class PlayerController: MonoBehaviour 
 {
@@ -17,6 +19,11 @@ public class PlayerController: MonoBehaviour
     //To change the jump curve
     [SerializeField] private float gravityModifierUp = 1.2f;
     [SerializeField] private float gravityModifierDown = 1.7f;
+    
+    //Audio
+    [SerializeField] private EventReference footstepEvent;
+    private float _distanceSinceFootstep;
+    private bool _wasOnFloor;
 
     //Hp system
     [SerializeField] private int MaxHp = 3;
@@ -48,6 +55,10 @@ public class PlayerController: MonoBehaviour
     {
         //Applies speed in the move input direction
         Move();
+        
+        PlayFootstepSound();
+        
+        PlayLandingSound();
         
         //Updates Coyote Time and Jump Input Buffer
         UpdateBuffers();
@@ -135,6 +146,7 @@ public class PlayerController: MonoBehaviour
             rb.linearVelocityY = jumpForce;
             _jumpBufferTimer = JumpBufferTimeMax;
             _coyoteTimer = CoyoteTimeMax;
+            RuntimeManager.PlayOneShot("event:/JUMP", transform.position);
         }
     }
     
@@ -148,6 +160,34 @@ public class PlayerController: MonoBehaviour
         {
             rb.gravityScale = gravityModifierUp;
         }
+    }
+
+    private void PlayFootstepSound()
+    {
+        float speed = Math.Abs(rb.linearVelocityX);
+
+        if (!IsOnTheFloor() || speed < 0.1f)
+        {
+            _distanceSinceFootstep = 0f;
+            return;
+        }
+        _distanceSinceFootstep += speed * Time.deltaTime;
+        if (_distanceSinceFootstep >= 2f)
+        {
+            _distanceSinceFootstep = 0f;
+            RuntimeManager.PlayOneShot("event:/FOOTSTEPS", transform.position);
+        }
+    }
+
+    private void PlayLandingSound()
+    {
+        bool onFloor=  IsOnTheFloor();
+        
+        if (onFloor && !_wasOnFloor)
+        {
+            RuntimeManager.PlayOneShot("event:/LAND", transform.position);
+        }
+        _wasOnFloor = onFloor;
     }
 
     public void SpawnOnTheFloor()
