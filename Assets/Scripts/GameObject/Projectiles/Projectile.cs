@@ -87,6 +87,5 @@ public class Projectile : MonoBehaviour
         gameObject.layer = defaultLayer;
         Rb.linearVelocity = Vector2.zero;
         Rb.gravityScale = 1;
-        
     }
 }

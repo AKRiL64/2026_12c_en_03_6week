@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DiamondCounter : MonoBehaviour
 {
-    public static DiamondCounter Instance { get; private set; };
+    public static DiamondCounter Instance { get; private set; }
     
     private TextMeshProUGUI _counter;
 

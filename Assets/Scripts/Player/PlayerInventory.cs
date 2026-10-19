@@ -12,7 +12,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private CoinBar coinBar;
     [SerializeField] private DiamondCounter diamondCounter;
 
-    void Awake()
+    void Start()
     {
         coinBar = CoinBar.Instance;
         diamondCounter = DiamondCounter.Instance;
@@ -34,11 +34,6 @@ public class PlayerInventory : MonoBehaviour
     {
         StatusPersister.SaveScore(Score);
         StatusPersister.SaveCollectibles(CollectiblesCount);
-    }
-
-    private void Awake()
-    {
-        GetCollectibles();
     }
 
     private void CollectCoin(CoinType type)
@@ -72,6 +67,11 @@ public class PlayerInventory : MonoBehaviour
                 diamondCounter.SetCounter(CollectiblesCount[type]);
                 break;
         }
+    }
+
+    public void UpdateCoinbar()
+    {
+        coinBar = CoinBar.Instance;
     }
 
     private void GetCollectibles()

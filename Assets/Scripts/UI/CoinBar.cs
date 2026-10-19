@@ -25,8 +25,9 @@ public class CoinBar : MonoBehaviour
     public void UpdateBar(int coinNumber)
     {
         _endPoint = Mathf.Clamp(coinNumber / (float)coinsNeeded, 0, 1f);
-        StopAllCoroutines();
-        StartCoroutine(FillBar());
+        _fillImage.fillAmount = coinNumber / (float)coinsNeeded;
+        //StopAllCoroutines();
+        //StartCoroutine(FillBar());
     }
 
     IEnumerator FillBar()

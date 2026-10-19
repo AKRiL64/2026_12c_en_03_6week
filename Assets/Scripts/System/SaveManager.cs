@@ -281,7 +281,8 @@ public static class SaveManager
 
     private static void SetupPlayer()
     {
-        _playerInventory.UpdateScore((int)_score);
+//        _playerInventory.UpdateScore((int)_score);
+        _playerInventory.UpdateCoinbar();
         _playerInventory.UpdateCollectibles(CoinType.Coin, (int)_coins);
         _playerInventory.UpdateCollectibles(CoinType.Diamond, (int)_diamonds);
     }
