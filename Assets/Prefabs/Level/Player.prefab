@@ -201,6 +201,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   input: {fileID: 4969271381316493594}
+  visuals: {fileID: 3003002834772968015}
+  animator: {fileID: 0}
   playerCollider: {fileID: 5139738832243297425}
   rb: {fileID: 2700115948072463015}
   moveSpeed: 5
@@ -282,9 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14509ea928be62fa28bcc43b1a725eb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
-  score: 0
-  coinCounter: 0
-  diamondCounter: 0
+  coinBar: {fileID: 0}
+  diamondCounter: {fileID: 0}
 --- !u!1001 &1263158504177218450
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -311,7 +312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6795306731927940713, guid: 70f91343c4f86a83ca361facd4e214d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.091
       objectReference: {fileID: 0}
     - target: {fileID: 6795306731927940713, guid: 70f91343c4f86a83ca361facd4e214d2, type: 3}
       propertyPath: m_LocalPosition.z
