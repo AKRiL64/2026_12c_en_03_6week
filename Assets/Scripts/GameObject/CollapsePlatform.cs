@@ -24,7 +24,7 @@ public class CollapsePlatform: MonoBehaviour
     private IEnumerator CollapseCoroutine()
     {
         _falling = true;
-        yield return new WaitForSeconds(appearTime);
+        yield return new WaitForSeconds(collapseTime);
         Disappear();
         
         yield return new WaitForSeconds(appearTime);

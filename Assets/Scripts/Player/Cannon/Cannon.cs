@@ -104,15 +104,9 @@ public class Cannon : MonoBehaviour
     //     if (other.CompareTag(projectilesTag) && other.gameObject == projectile)
     //         CatchProjectile(other);
     // }
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag(projectilesTag))
-            Debug.Log($"Still overlapping: {other.name}");
-    }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"Cannon trigger entered by: {other.name}, tag: {other.tag}");
         
         if (other.CompareTag(projectilesTag))
             CatchProjectile(other);
