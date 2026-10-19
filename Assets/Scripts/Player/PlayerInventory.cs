@@ -13,6 +13,12 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private CoinBar coinBar;
     [SerializeField] private DiamondCounter diamondCounter;
 
+    void Awake()
+    {
+        coinBar = CoinBar.Instance;
+        diamondCounter = DiamondCounter.Instance;
+    }
+    
     void OnEnable()
     {
         CollectiblesEvents.OnCoinCollected += CollectCoin;

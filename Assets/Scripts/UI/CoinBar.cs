@@ -9,8 +9,15 @@ public class CoinBar : MonoBehaviour
     private Image _fillImage;
     private float _endPoint = 0f;
     
+    public static CoinBar Instance { get; private set; }
+    
     private void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+        
         if(_fillImage == null)
             _fillImage = GetComponent<Image>();
     }
