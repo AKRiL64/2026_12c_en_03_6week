@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pullable
   - Lever
+  - Cannon
   layers:
   - Default
   - TransparentFX
