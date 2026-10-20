@@ -32,7 +32,7 @@ public class SwitchCannon: SwitchObject
         Vector2 direction = shootPoint.transform.right;
         cannonBall.Launch(shootForce, direction);
         
-        RuntimeManager.PlayOneShot("event:/CANNON_SPIT", transform.position);
+        RuntimeManager.PlayOneShot("event:/SWITCH_CANNON", transform.position);
     }
 
     private IEnumerator Reload()

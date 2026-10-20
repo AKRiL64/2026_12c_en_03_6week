@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using FMODUnity;
 using UnityEngine;
 
 public class CollapsePlatform: MonoBehaviour
@@ -18,6 +19,8 @@ public class CollapsePlatform: MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(CollapseCoroutine());
+            
+            RuntimeManager.PlayOneShot("event:/COLLAPSE_PLATFORM", transform.position);
         }
     }
 

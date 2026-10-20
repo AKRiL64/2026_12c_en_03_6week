@@ -135,6 +135,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-4480904339783869370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SWITCH_CANNON
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/SWITCH_CANNON
+  Guid:
+    Data1: -1255390270
+    Data2: 1266677611
+    Data3: -751486299
+    Data4: -1441454601
+  Banks:
+  - {fileID: 6522115521565199531}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3572954589047664779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,13 +300,14 @@ MonoBehaviour:
   - {fileID: -3572954589047664779}
   - {fileID: 7480251003609790430}
   - {fileID: -7038828730542279071}
+  - {fileID: -4480904339783869370}
   EditorParameters: []
   MasterBanks:
   - {fileID: 3043961257468248336}
   StringsBanks:
   - {fileID: 2554738150305626089}
   cacheVersion: 131861
-  cacheTime: 639281107331889579
+  cacheTime: 639281120123208907
   SerializableEventsDict:
   - key: event:/RE_AGRO
     index: 0
@@ -317,6 +345,8 @@ MonoBehaviour:
     index: 16
   - key: event:/CHECKPOINT
     index: 17
+  - key: event:/SWITCH_CANNON
+    index: 18
 --- !u!114 &2125218547807558685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,10 +380,10 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639281106635185860
+  lastModified: 639281120122764762
   FileSizes:
   - Name: 
-    Value: 1740
+    Value: 1790
   Exists: 1
 --- !u!114 &2725306343619567655
 MonoBehaviour:
@@ -451,7 +481,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639281106635161487
+  lastModified: 639281120122754657
   FileSizes: []
   Exists: 1
 --- !u!114 &4391319621202900439
@@ -568,7 +598,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/Player
-  lastModified: 639281103798030312
+  lastModified: 639281120123208907
   FileSizes: []
   Exists: 1
 --- !u!114 &7109182994690172367
