@@ -93,12 +93,7 @@ public class Cannon : MonoBehaviour
     }
     void CancelPulling(InputAction.CallbackContext ctx)
     {
-        suckParticles.Stop(true,ParticleSystemStopBehavior.StopEmitting);
-        if (suckShakeCoroutine != null)
-        {
-            StopCoroutine(suckShakeCoroutine);
-            suckShakeCoroutine = null;
-        }
+        StopSuckEffects();
 
         OnPullableRelease?.Invoke();
         
@@ -135,6 +130,8 @@ public class Cannon : MonoBehaviour
 
     private void LaunchProjectile()
     {
+        Follower follower = projectile.GetComponent<Follower>();
+        
         PositionProjectile();
         projectile.SetActive(true);
         projectile.GetComponent<Projectile>().Launch(launchForce);
@@ -148,10 +145,22 @@ public class Cannon : MonoBehaviour
         projectile.transform.rotation *= Quaternion.FromToRotation(
             projectile.transform.up, transform.up);
     }
+    
+    private void StopSuckEffects()
+    {
+        suckParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        if (suckShakeCoroutine != null)
+        {
+            StopCoroutine(suckShakeCoroutine);
+            suckShakeCoroutine = null;
+        }
+    }
 
     private void CatchProjectile(Collider2D other)
     {
         _collider.enabled = false;
+        
+        StopSuckEffects();
         
         GameObject proj = other.gameObject;
         proj.SetActive(false);

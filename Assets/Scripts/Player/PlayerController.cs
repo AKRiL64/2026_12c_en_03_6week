@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PlayerController: MonoBehaviour 
 {
+    [SerializeField] GameObject cannon;
+    
     [SerializeField] private PlayerInputHandler input;
     [SerializeField] private SpriteRenderer visuals;
     private bool _wasGrounded;
@@ -40,7 +42,8 @@ public class PlayerController: MonoBehaviour
     private bool CanJump =>
         _jumpBufferTimer < JumpBufferTimeMax &&
         _coyoteTimer < CoyoteTimeMax;
-
+    
+    
     public bool HasDownInput => input.InputVector.y < 0;
 
     private void Awake()
@@ -189,5 +192,10 @@ public class PlayerController: MonoBehaviour
         {
             SaveManager.Load(SaveManager.SaveFilename);
         }
+    }
+
+    public void EnableCannon()
+    {
+        cannon.gameObject.SetActive(true);
     }
 }
