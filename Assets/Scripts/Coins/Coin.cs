@@ -4,30 +4,45 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     [SerializeField] public CoinType type;
+
     private Animator anim;
-    private Collider2D collider;
+    private Collider2D coinCollider;
     private bool collected = false;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        collider = GetComponent<Collider2D>();
+        coinCollider = GetComponent<Collider2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (collected) return;
+
         collected = true;
+        coinCollider.enabled = false;
 
         CollectiblesEvents.CoinCollected(type);
         anim.SetTrigger("pickup");
-        collider.enabled = false;
+
         StartCoroutine(DestroyAfterAnimation());
     }
 
     private IEnumerator DestroyAfterAnimation()
     {
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+        // Wait until the pickup animation state starts
+        yield return null;
+
+        while (!anim.GetCurrentAnimatorStateInfo(0).IsName("pickup"))
+        {
+            yield return null;
+        }
+
+        // Wait for the animation to finish
+        while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+        {
+            yield return null;
+        }
 
         Destroy(gameObject);
     }
