@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using FMODUnity;
+using UnityEngine;
 
 public class Water: MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Water: MonoBehaviour
         {
             player.TakeDamage(1);
             player.SpawnOnTheFloor();
+            RuntimeManager.PlayOneShot("event:/WATER", transform.position);
         }
     }
 }

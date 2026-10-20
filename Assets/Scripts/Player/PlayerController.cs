@@ -1,6 +1,6 @@
 ﻿using System;
-using UnityEngine;
 using FMODUnity;
+using UnityEngine;
 
 public class PlayerController: MonoBehaviour 
 {
@@ -21,7 +21,6 @@ public class PlayerController: MonoBehaviour
     [SerializeField] private float gravityModifierDown = 1.7f;
     
     //Audio
-    [SerializeField] private EventReference footstepEvent;
     private float _distanceSinceFootstep;
     private bool _wasOnFloor;
 
@@ -49,6 +48,7 @@ public class PlayerController: MonoBehaviour
     {
         _lastPosition = transform.position;
         _currentHp = MaxHp;
+        _wasOnFloor = IsOnTheFloor();
     }
     
     private void Update()
@@ -199,5 +199,6 @@ public class PlayerController: MonoBehaviour
     public void TakeDamage(int damage)
     {
         _currentHp -= damage;
+        RuntimeManager.PlayOneShot("event:/TAKE_DMG", transform.position);
     }
 }

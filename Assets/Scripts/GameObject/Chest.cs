@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class Chest : MonoBehaviour
@@ -18,5 +19,7 @@ public class Chest : MonoBehaviour
     private void Open()
     {
         CollectiblesEvents.ChestOpened(silverCoins, goldenCoins, diamond);
+        
+        RuntimeManager.PlayOneShot("event:/CHEST", transform.position);
     }
 }

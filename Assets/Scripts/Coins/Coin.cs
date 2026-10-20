@@ -1,4 +1,5 @@
 using System;
+using FMODUnity;
 using UnityEngine;
 
 public class Coin : MonoBehaviour
@@ -9,5 +10,7 @@ public class Coin : MonoBehaviour
     {
         CollectiblesEvents.CoinCollected(type);
         Destroy(gameObject);
+        
+        RuntimeManager.PlayOneShot("event:/COINS", transform.position);
     }
 }

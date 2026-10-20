@@ -1,4 +1,5 @@
 ﻿using System;
+using FMODUnity;
 using UnityEngine;
 
 public class Lever : MonoBehaviour, IPullable
@@ -21,6 +22,7 @@ public class Lever : MonoBehaviour, IPullable
     
     private void ChangePosition()
     {
+        RuntimeManager.PlayOneShot("event:/LEVER", transform.position);
         if (leverPosition == LeverPosition.Left)
         {
             leverPosition = LeverPosition.Right;

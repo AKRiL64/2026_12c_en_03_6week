@@ -1,4 +1,5 @@
 using System;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -111,6 +112,8 @@ public class Cannon : MonoBehaviour
         projectile.SetActive(true);
         projectile.GetComponent<Projectile>().Launch(launchForce);
         projectile = null;
+        
+        RuntimeManager.PlayOneShot("event:/CANNON_SPIT", transform.position);
     }
 
     private void PositionProjectile()
@@ -131,6 +134,8 @@ public class Cannon : MonoBehaviour
         
         _actions.Player.Pull.canceled -= CancelPulling;
         _actions.Player.Attack.Enable();
+        
+        RuntimeManager.PlayOneShot("event:/CANNON_SWALLOW",  transform.position);
     }
 
     private void MoveObjectToCannon(RaycastHit2D hit)
