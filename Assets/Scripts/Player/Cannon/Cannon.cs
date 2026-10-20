@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class Cannon : MonoBehaviour
 {
     [SerializeField] private GameObject projectile;
+    [SerializeField] private ParticleSystem suckParticles;
+    private Coroutine suckShakeCoroutine;
     [SerializeField] private string projectilesTag = "Pullable";
     [SerializeField] private float launchForce = 10;
     [SerializeField] private float pullRadius = 10;
@@ -45,10 +47,15 @@ public class Cannon : MonoBehaviour
         _actions.Player.Pull.started -= TryPullObject;
         _actions.Player.Pull.canceled -= CancelPulling;
         _actions.Player.Attack.performed -= Shoot;
+        _actions.Player.Disable();
     }
 
     void TryPullObject(InputAction.CallbackContext ctx)
     {
+        suckParticles.Play();
+
+        if (suckShakeCoroutine == null)
+            suckShakeCoroutine = StartCoroutine(SuckShake());
         //TODO replace with an event OR make camera static (or leave like this its not too bad)
         dynamicCamera.ShakeCamera(0.3f, 0.05f);
         _mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -77,9 +84,18 @@ public class Cannon : MonoBehaviour
             _actions.Player.Pull.started -= TryPullObject;
         }
     }
-
+    private System.Collections.IEnumerator SuckShake()
+    {
+        while (true)
+        {
+            dynamicCamera.ShakeCamera(0.3f, 0.02f);
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
     void CancelPulling(InputAction.CallbackContext ctx)
     {
+        StopSuckEffects();
+
         OnPullableRelease?.Invoke();
         
         if (projectile != null)
@@ -100,14 +116,23 @@ public class Cannon : MonoBehaviour
         _actions.Player.Pull.canceled += CancelPulling;
     }
 
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.CompareTag(projectilesTag) && other.gameObject == projectile)
+    //         CatchProjectile(other);
+    // }
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(projectilesTag) && other.gameObject == projectile)
+        
+        if (other.CompareTag(projectilesTag))
             CatchProjectile(other);
     }
 
     private void LaunchProjectile()
     {
+        Follower follower = projectile.GetComponent<Follower>();
+        
         PositionProjectile();
         projectile.SetActive(true);
         projectile.GetComponent<Projectile>().Launch(launchForce);
@@ -123,10 +148,22 @@ public class Cannon : MonoBehaviour
         projectile.transform.rotation *= Quaternion.FromToRotation(
             projectile.transform.up, transform.up);
     }
+    
+    private void StopSuckEffects()
+    {
+        suckParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        if (suckShakeCoroutine != null)
+        {
+            StopCoroutine(suckShakeCoroutine);
+            suckShakeCoroutine = null;
+        }
+    }
 
     private void CatchProjectile(Collider2D other)
     {
         _collider.enabled = false;
+        
+        StopSuckEffects();
         
         GameObject proj = other.gameObject;
         proj.SetActive(false);
@@ -141,6 +178,10 @@ public class Cannon : MonoBehaviour
     private void MoveObjectToCannon(RaycastHit2D hit)
     {
         _collider.enabled = true;
+        
+        Projectile proj = hit.collider.GetComponent<Projectile>();
+        if (proj != null)
+            proj.StartSwallowing();
         
         Follower follower = hit.collider.gameObject.GetComponent<Follower>();
         follower.target = gameObject;

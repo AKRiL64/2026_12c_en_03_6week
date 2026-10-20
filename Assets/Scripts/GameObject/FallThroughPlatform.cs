@@ -36,7 +36,7 @@ public class FallThroughPlatform : MonoBehaviour
         isFallingThrough = false;
     }
 
-    private void SetPlayerOnPlatform(Collider2D other, bool value)
+    private void TrySetPlayerOnPlatform(Collider2D other, bool value)
     {
         PlayerController p = other.GetComponentInParent<PlayerController>();
         if (!p) return;
@@ -49,11 +49,11 @@ public class FallThroughPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        SetPlayerOnPlatform(collision.collider, true);
+        TrySetPlayerOnPlatform(collision.collider, true);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        SetPlayerOnPlatform(collision.collider, false);
+        TrySetPlayerOnPlatform(collision.collider, false);
     }
 }

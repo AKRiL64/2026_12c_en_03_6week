@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class PlayerController: MonoBehaviour 
 {
+    [SerializeField] GameObject cannon;
+    
     [SerializeField] private PlayerInputHandler input;
+    [SerializeField] private SpriteRenderer visuals;
+    private bool _wasGrounded;
+    private bool _isGrounded;
+    [SerializeField] private Animator animator;
     [SerializeField] private BoxCollider2D playerCollider;
     //TODO: change Rigidbody with Character Controller
     [SerializeField] private Rigidbody2D rb;
@@ -41,9 +47,15 @@ public class PlayerController: MonoBehaviour
     private bool CanJump =>
         _jumpBufferTimer < JumpBufferTimeMax &&
         _coyoteTimer < CoyoteTimeMax;
-
-    public bool HasDownInput => input.InputVector.y < 0;
     
+    
+    public bool HasDownInput => input.InputVector.y < 0;
+
+    private void Awake()
+    {
+        CheckpointManager.SetPlayer(gameObject);
+    }
+
     private void Start()
     {
         _lastPosition = transform.position;
@@ -62,7 +74,9 @@ public class PlayerController: MonoBehaviour
         
         //Updates Coyote Time and Jump Input Buffer
         UpdateBuffers();
-        
+
+        UpdateGroundedState(); 
+
         //Executes jump if all conditions for it are met
         TryToJump();
 
@@ -80,6 +94,12 @@ public class PlayerController: MonoBehaviour
         if (inputX != 0f)
         {
             directionX = Mathf.Sign(inputX);
+            visuals.flipX = directionX != 1;
+            animator.SetBool("moving", true);
+        }
+        else
+        {
+            animator.SetBool("moving", false);
         }
         
         rb.linearVelocityX = directionX * moveSpeed;
@@ -116,7 +136,14 @@ public class PlayerController: MonoBehaviour
         }
         
     }
+    private void UpdateGroundedState()
+    {
+        _isGrounded = IsOnTheFloor();
 
+        animator.SetBool("grounded", _isGrounded);
+
+        _wasGrounded = _isGrounded;
+    }
     private bool IsOnTheFloor() 
     {
         Bounds bounds = playerCollider.bounds;
@@ -146,6 +173,8 @@ public class PlayerController: MonoBehaviour
             rb.linearVelocityY = jumpForce;
             _jumpBufferTimer = JumpBufferTimeMax;
             _coyoteTimer = CoyoteTimeMax;
+            animator.SetTrigger("jump");
+            
             RuntimeManager.PlayOneShot("event:/JUMP", transform.position);
         }
     }
@@ -198,7 +227,18 @@ public class PlayerController: MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _currentHp -= damage;
         RuntimeManager.PlayOneShot("event:/TAKE_DMG", transform.position);
+        
+        _currentHp -= damage;
+        _currentHp = Math.Clamp(_currentHp - damage, 0, MaxHp);
+        if (_currentHp <= 0)
+        {
+            SaveManager.Load(SaveManager.SaveFilename);
+        }
+    }
+
+    public void EnableCannon()
+    {
+        cannon.gameObject.SetActive(true);
     }
 }

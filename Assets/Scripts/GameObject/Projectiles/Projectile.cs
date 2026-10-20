@@ -23,14 +23,26 @@ public class Projectile : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if(IsLaunched && Vector2.Distance(transform.position, InitialPosition) > flyDistance)
-            Destroy(gameObject);
+        if (IsLaunched)
+        {
+            if (Vector2.Distance(transform.position, InitialPosition) > flyDistance)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
     public virtual void Launch(float launchForce)
     {
         SetupMetadata();
         Rb.AddForce(GetDirection() * launchForce * Rb.mass, ForceMode2D.Impulse);
+
+    }
+
+    public virtual void Launch(float launchForce, Vector2 direction)
+    {
+        SetupMetadata();
+        Rb.AddForce(direction * launchForce * Rb.mass, ForceMode2D.Impulse);
     }
 
     protected virtual Vector2 GetDirection()
@@ -52,6 +64,9 @@ public class Projectile : MonoBehaviour
 
     public virtual void OnCollisionEnter2D(Collision2D other)
     {
+        if (other.gameObject.CompareTag("Cannon"))
+            return;
+
         if (other.gameObject.CompareTag(leverTag))
         {
             Lever lever = other.gameObject.GetComponent<Lever>();
@@ -64,14 +79,26 @@ public class Projectile : MonoBehaviour
 
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Cannon"))
+            return;
+
         Stop();
     }
 
     protected virtual void Stop()
     {
+        
         Rb.linearVelocityX = 0;
         gameObject.layer = defaultLayer;
         IsLaunched = false;
+        Rb.gravityScale = 1;
+    }
+
+    public virtual void StartSwallowing()
+    {
+        IsLaunched = false;
+        gameObject.layer = defaultLayer;
+        Rb.linearVelocity = Vector2.zero;
         Rb.gravityScale = 1;
     }
 }

@@ -5,14 +5,28 @@ public class Water: MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != "Player") return;
+        RuntimeManager.PlayOneShot("event:/WATER", transform.position);
         
-        PlayerController player = collision.GetComponent<PlayerController>();
-        if (player != null)
+        if (! (collision.CompareTag("Player") || collision.CompareTag("Pullable"))) return;
+
+        if (collision.tag == "Player")
         {
             player.TakeDamage(1);
             player.SpawnOnTheFloor();
-            RuntimeManager.PlayOneShot("event:/WATER", transform.position);
+
+            PlayerController player = collision.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.TakeDamage(1);
+                player.SpawnOnTheFloor();
+            }
         }
+
+        if (collision.tag == "Pullable")
+        {
+            GameObject pullable = collision.gameObject;
+            Destroy(pullable);
+        }
+
     }
 }

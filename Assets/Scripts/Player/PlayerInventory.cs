@@ -3,15 +3,21 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] private int score = 0;
-    private readonly Dictionary<CoinType, int> _collectiblesCount = new Dictionary<CoinType, int>()
+    public int Score { get; private set; } = 0;
+    public readonly Dictionary<CoinType, int> CollectiblesCount = new Dictionary<CoinType, int>()
     {
         { CoinType.Coin, 0 }, { CoinType.Diamond, 0 }
     };
 
-    [SerializeField] private int coinCounter = 0; // delete once the UI is ready
-    [SerializeField] private int diamondCounter = 0;
+    [SerializeField] private CoinBar coinBar;
+    [SerializeField] private DiamondCounter diamondCounter;
 
+    void Start()
+    {
+        coinBar = CoinBar.Instance;
+        diamondCounter = DiamondCounter.Instance;
+    }
+    
     void OnEnable()
     {
         CollectiblesEvents.OnCoinCollected += CollectCoin;
@@ -22,6 +28,12 @@ public class PlayerInventory : MonoBehaviour
     {
         CollectiblesEvents.OnCoinCollected -= CollectCoin;
         CollectiblesEvents.OnChestOpened -= CollectChest;
+    }
+
+    void OnDestroy()
+    {
+        StatusPersister.SaveScore(Score);
+        StatusPersister.SaveCollectibles(CollectiblesCount);
     }
 
     private void CollectCoin(CoinType type)
@@ -38,17 +50,36 @@ public class PlayerInventory : MonoBehaviour
         UpdateCollectibles(CoinType.Diamond, diamond ? 1 : 0);
     }
 
-    private void UpdateCollectibles(CoinType type, int delta)
+    public void UpdateCollectibles(CoinType type, int delta)
     {
         if (delta == 0)
             return;
-        CollectiblesEvents.CollectiblesChanged(type, _collectiblesCount[type], delta);
-        _collectiblesCount[type] += delta;
-        
-        if(type == CoinType.Coin) // delete once the UI is ready
-            coinCounter += delta;
-        else if(type == CoinType.Diamond)
-            diamondCounter += delta;
+        CollectiblesEvents.CollectiblesChanged(type, CollectiblesCount[type], delta);
+        CollectiblesCount[type] += delta;
+
+
+        switch (type)
+        {
+            case CoinType.Coin:
+                coinBar.UpdateBar(CollectiblesCount[type]);
+                break;
+            case CoinType.Diamond:
+                diamondCounter.SetCounter(CollectiblesCount[type]);
+                break;
+        }
     }
-    
+
+    public void UpdateCoinbar()
+    {
+        coinBar = CoinBar.Instance;
+    }
+
+    private void GetCollectibles()
+    {
+        Score = StatusPersister.Score;
+        CollectiblesCount[CoinType.Coin] = StatusPersister.CollectiblesCount[CoinType.Coin];
+        CollectiblesCount[CoinType.Diamond] = StatusPersister.CollectiblesCount[CoinType.Diamond];
+        
+        Debug.Log($"{Score} - {CollectiblesCount[CoinType.Coin]} -  {CollectiblesCount[CoinType.Diamond]}");
+    }
 }

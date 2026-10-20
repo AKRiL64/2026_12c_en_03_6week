@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7736755826212770816}
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db40f9e48daf4de1a7026552ae753b8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MovingBlock
-  allowedAxises: 
+  allowedAxises: 00000000
   rb: {fileID: 4166054329498310570}
 --- !u!50 &4166054329498310570
 Rigidbody2D:
