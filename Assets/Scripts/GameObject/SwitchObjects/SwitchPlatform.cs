@@ -12,7 +12,7 @@ public class SwitchPlatform: SwitchObject
         onVisual.SetActive(true);
         offVisual.SetActive(false);
         
-        RuntimeManager.PlayOneShot("event:/SWITCH_PLATFORM", transform.position);
+        if(!IsInitializing) RuntimeManager.PlayOneShot("event:/SWITCH_PLATFORM", transform.position);
     }
 
     protected override void SwitchOff()
@@ -21,6 +21,6 @@ public class SwitchPlatform: SwitchObject
         onVisual.SetActive(false);
         offVisual.SetActive(true);
         
-        RuntimeManager.PlayOneShot("event:/SWITCH_PLATFORM", transform.position);
+        if(!IsInitializing) RuntimeManager.PlayOneShot("event:/SWITCH_PLATFORM", transform.position);
     }
 }

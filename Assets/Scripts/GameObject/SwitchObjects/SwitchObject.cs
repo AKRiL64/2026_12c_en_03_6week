@@ -10,11 +10,13 @@ public abstract class SwitchObject: MonoBehaviour
     }
     [SerializeField] private Lever assignedLever;
     [SerializeField] private SwitchState switchState;
+    protected bool IsInitializing { get; private set; }
     
     private void Start()
     {
         if (assignedLever != null) assignedLever.OnLeverSwitch += Switch;
         
+        IsInitializing =  true;
         if (switchState == SwitchState.On)
         {
             SwitchOn();
@@ -23,6 +25,7 @@ public abstract class SwitchObject: MonoBehaviour
         {
             SwitchOff();
         }
+        IsInitializing = false;
     }
 
     private void Switch()

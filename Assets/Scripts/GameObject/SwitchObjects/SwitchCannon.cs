@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using FMODUnity;
 using UnityEngine;
 
 public class SwitchCannon: SwitchObject
@@ -30,6 +31,8 @@ public class SwitchCannon: SwitchObject
 
         Vector2 direction = shootPoint.transform.right;
         cannonBall.Launch(shootForce, direction);
+        
+        RuntimeManager.PlayOneShot("event:/CANNON_SPIT", transform.position);
     }
 
     private IEnumerator Reload()

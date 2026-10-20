@@ -1,3 +1,4 @@
+using FMODUnity;
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
@@ -22,6 +23,8 @@ public class Checkpoint : MonoBehaviour
             SaveManager.SetPlayerInventory(other.gameObject.GetComponent<PlayerInventory>());
             SaveManager.UpdateObjectManager(ObjectManager.Instance);
             SaveManager.Save(CheckpointCounter);
+            
+            RuntimeManager.PlayOneShot("event:/CHECKPOINT", transform.position);
         }
     }
 

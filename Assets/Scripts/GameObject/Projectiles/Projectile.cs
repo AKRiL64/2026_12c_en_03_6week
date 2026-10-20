@@ -36,7 +36,6 @@ public class Projectile : MonoBehaviour
     {
         SetupMetadata();
         Rb.AddForce(GetDirection() * launchForce * Rb.mass, ForceMode2D.Impulse);
-
     }
 
     public virtual void Launch(float launchForce, Vector2 direction)

@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7038828730542279071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/CHECKPOINT
+  m_EditorClassIdentifier: FMODUnityEditor::FMODUnity.EditorEventRef
+  Path: event:/CHECKPOINT
+  Guid:
+    Data1: -1679366630
+    Data2: 1125382961
+    Data3: -1133591884
+    Data4: 1968130436
+  Banks:
+  - {fileID: 7109182994690172367}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6792932964822742227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +177,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Platforms.bank
   Name: Platforms
   StudioPath: bank:/Platforms
-  lastModified: 639280314917536275
+  lastModified: 639281091624186759
   FileSizes: []
   Exists: 1
 --- !u!114 &-2322487430125724916
@@ -245,13 +272,14 @@ MonoBehaviour:
   - {fileID: -739562831900899839}
   - {fileID: -3572954589047664779}
   - {fileID: 7480251003609790430}
+  - {fileID: -7038828730542279071}
   EditorParameters: []
   MasterBanks:
   - {fileID: 3043961257468248336}
   StringsBanks:
   - {fileID: 2554738150305626089}
   cacheVersion: 131861
-  cacheTime: 639281082132269667
+  cacheTime: 639281107331889579
   SerializableEventsDict:
   - key: event:/RE_AGRO
     index: 0
@@ -287,6 +315,8 @@ MonoBehaviour:
     index: 15
   - key: event:/FOOTSTEPS
     index: 16
+  - key: event:/CHECKPOINT
+    index: 17
 --- !u!114 &2125218547807558685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,10 +350,10 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639280330348269999
+  lastModified: 639281106635185860
   FileSizes:
   - Name: 
-    Value: 1690
+    Value: 1740
   Exists: 1
 --- !u!114 &2725306343619567655
 MonoBehaviour:
@@ -421,7 +451,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639280330348259949
+  lastModified: 639281106635161487
   FileSizes: []
   Exists: 1
 --- !u!114 &4391319621202900439
@@ -538,7 +568,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/Player
-  lastModified: 639281074975198710
+  lastModified: 639281103798030312
   FileSizes: []
   Exists: 1
 --- !u!114 &7109182994690172367
@@ -556,7 +586,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Interactables.bank
   Name: Interactables
   StudioPath: bank:/Interactables
-  lastModified: 639281082132269667
+  lastModified: 639281107331889579
   FileSizes: []
   Exists: 1
 --- !u!114 &7480251003609790430

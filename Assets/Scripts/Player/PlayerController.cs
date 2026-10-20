@@ -229,7 +229,6 @@ public class PlayerController: MonoBehaviour
     {
         RuntimeManager.PlayOneShot("event:/TAKE_DMG", transform.position);
         
-        _currentHp -= damage;
         _currentHp = Math.Clamp(_currentHp - damage, 0, MaxHp);
         if (_currentHp <= 0)
         {
