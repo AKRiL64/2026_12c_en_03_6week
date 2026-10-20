@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 public class Cannon : MonoBehaviour
 {
     [SerializeField] private GameObject projectile;
+    [SerializeField] private ParticleSystem suckParticles;
+    private Coroutine suckShakeCoroutine;
     [SerializeField] private string projectilesTag = "Pullable";
     [SerializeField] private float launchForce = 10;
     [SerializeField] private float pullRadius = 10;
@@ -49,6 +51,10 @@ public class Cannon : MonoBehaviour
 
     void TryPullObject(InputAction.CallbackContext ctx)
     {
+        suckParticles.Play();
+
+        if (suckShakeCoroutine == null)
+            suckShakeCoroutine = StartCoroutine(SuckShake());
         //TODO replace with an event OR make camera static (or leave like this its not too bad)
         dynamicCamera.ShakeCamera(0.3f, 0.05f);
         _mousePosition = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
@@ -77,9 +83,23 @@ public class Cannon : MonoBehaviour
             _actions.Player.Pull.started -= TryPullObject;
         }
     }
-
+    private System.Collections.IEnumerator SuckShake()
+    {
+        while (true)
+        {
+            dynamicCamera.ShakeCamera(0.3f, 0.05f);
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
     void CancelPulling(InputAction.CallbackContext ctx)
     {
+        suckParticles.Stop(true,ParticleSystemStopBehavior.StopEmitting);
+        if (suckShakeCoroutine != null)
+        {
+            StopCoroutine(suckShakeCoroutine);
+            suckShakeCoroutine = null;
+        }
+
         OnPullableRelease?.Invoke();
         
         if (projectile != null)
