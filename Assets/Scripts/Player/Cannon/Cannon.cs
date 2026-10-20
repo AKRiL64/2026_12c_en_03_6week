@@ -87,7 +87,7 @@ public class Cannon : MonoBehaviour
     {
         while (true)
         {
-            dynamicCamera.ShakeCamera(0.3f, 0.05f);
+            dynamicCamera.ShakeCamera(0.3f, 0.02f);
             yield return new WaitForSeconds(0.25f);
         }
     }
