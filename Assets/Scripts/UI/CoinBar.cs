@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class CoinBar : MonoBehaviour
 {
-    [SerializeField] private int coinsNeeded = 5; // change when the money-collecting is ready
+    [SerializeField] private int coinsNeeded = 5; 
     [SerializeField] private float growSpeed = 0.01f;
     private Image _fillImage;
     private float _endPoint = 0f;
@@ -21,13 +21,18 @@ public class CoinBar : MonoBehaviour
         if(_fillImage == null)
             _fillImage = GetComponent<Image>();
     }
+
+    public void SetNeeded(int coins)
+    {
+        coinsNeeded = coins;
+    }
     
     public void UpdateBar(int coinNumber)
     {
         _endPoint = Mathf.Clamp(coinNumber / (float)coinsNeeded, 0, 1f);
         _fillImage.fillAmount = coinNumber / (float)coinsNeeded;
-        //StopAllCoroutines();
-        //StartCoroutine(FillBar());
+        StopAllCoroutines();
+        StartCoroutine(FillBar());
     }
 
     IEnumerator FillBar()
