@@ -9776,8 +9776,12 @@ PrefabInstance:
       value: SwitchPlatform (7)
       objectReference: {fileID: 0}
     - target: {fileID: 3328206095170498794, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0422136
+      objectReference: {fileID: 0}
+    - target: {fileID: 3328206095170498794, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: m_Offset.x
-      value: 0
+      value: -0.016704857
       objectReference: {fileID: 0}
     - target: {fileID: 8099984087094041610, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: assignedLever
@@ -10186,11 +10190,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3328206095170498794, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: m_Size.x
-      value: 1
+      value: 1.0439903
       objectReference: {fileID: 0}
     - target: {fileID: 3328206095170498794, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: m_Offset.x
-      value: 0
+      value: 0.018884957
       objectReference: {fileID: 0}
     - target: {fileID: 8099984087094041610, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: assignedLever
