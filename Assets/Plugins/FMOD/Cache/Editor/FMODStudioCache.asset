@@ -154,7 +154,7 @@ MonoBehaviour:
     Data3: -751486299
     Data4: -1441454601
   Banks:
-  - {fileID: 6522115521565199531}
+  - {fileID: 6468569942441480136}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -204,7 +204,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Platforms.bank
   Name: Platforms
   StudioPath: bank:/Platforms
-  lastModified: 639281091624186759
+  lastModified: 639287131583888907
   FileSizes: []
   Exists: 1
 --- !u!114 &-2322487430125724916
@@ -307,7 +307,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 2554738150305626089}
   cacheVersion: 131861
-  cacheTime: 639281120123208907
+  cacheTime: 639287131790256987
   SerializableEventsDict:
   - key: event:/RE_AGRO
     index: 0
@@ -362,7 +362,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Menu.bank
   Name: Menu
   StudioPath: bank:/Menu
-  lastModified: 639271440177424491
+  lastModified: 639287084245636517
   FileSizes: []
   Exists: 1
 --- !u!114 &2554738150305626089
@@ -380,10 +380,10 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639281120122764762
+  lastModified: 639287130368147790
   FileSizes:
   - Name: 
-    Value: 1790
+    Value: 1876
   Exists: 1
 --- !u!114 &2725306343619567655
 MonoBehaviour:
@@ -404,7 +404,7 @@ MonoBehaviour:
     Data3: 1045153714
     Data4: -582306288
   Banks:
-  - {fileID: 6468569942441480136}
+  - {fileID: 7109182994690172367}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -481,7 +481,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639281120122754657
+  lastModified: 639287130368132311
   FileSizes: []
   Exists: 1
 --- !u!114 &4391319621202900439
@@ -580,7 +580,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Enemies.bank
   Name: Enemies
   StudioPath: bank:/Enemies
-  lastModified: 639281074715812437
+  lastModified: 639287130367694016
   FileSizes: []
   Exists: 1
 --- !u!114 &6522115521565199531
@@ -598,7 +598,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/Player
-  lastModified: 639281120123208907
+  lastModified: 639287131584148124
   FileSizes: []
   Exists: 1
 --- !u!114 &7109182994690172367
@@ -616,7 +616,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Interactables.bank
   Name: Interactables
   StudioPath: bank:/Interactables
-  lastModified: 639281107331889579
+  lastModified: 639287131790256987
   FileSizes: []
   Exists: 1
 --- !u!114 &7480251003609790430
