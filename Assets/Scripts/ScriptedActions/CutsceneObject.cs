@@ -20,6 +20,7 @@ public class CutsceneObject: MonoBehaviour
         triggers = new Dictionary<ScriptedActionTrigger, int>();
         moveActions = new Dictionary<int, ScriptedActionMove>();
         teleportActions = new Dictionary<int, ScriptedActionTeleport>();
+        dialogueActions = new Dictionary<int, ScriptedActionDialogue>();
 
         foreach (TriggerEntry entry in triggerEntries)
         {
