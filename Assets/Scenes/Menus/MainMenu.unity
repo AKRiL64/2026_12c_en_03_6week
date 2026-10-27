@@ -4806,7 +4806,7 @@ GameObject:
   - component: {fileID: 1204901346}
   - component: {fileID: 1204901345}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: NOT AN ACTUAL SLIDER, ILL CHANGE IT LATER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
