@@ -9447,15 +9447,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1970604133776405347, guid: 71d95ff17d0cecb58b5eb3ab54175322, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.376713
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1970604133776405347, guid: 71d95ff17d0cecb58b5eb3ab54175322, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.008
+      value: 21.0131
       objectReference: {fileID: 0}
     - target: {fileID: 1970604133776405347, guid: 71d95ff17d0cecb58b5eb3ab54175322, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.728
+      value: 3.781
       objectReference: {fileID: 0}
     - target: {fileID: 1970604133776405347, guid: 71d95ff17d0cecb58b5eb3ab54175322, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9774,6 +9774,10 @@ PrefabInstance:
     - target: {fileID: 3258900886623156929, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: m_Name
       value: SwitchPlatform (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3328206095170498794, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8099984087094041610, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: assignedLever
@@ -10179,6 +10183,14 @@ PrefabInstance:
     - target: {fileID: 3258900886623156929, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: m_Name
       value: SwitchPlatform (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3328206095170498794, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3328206095170498794, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
+      propertyPath: m_Offset.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8099984087094041610, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: assignedLever
@@ -131177,7 +131189,7 @@ PrefabInstance:
       objectReference: {fileID: 274294455}
     - target: {fileID: 464148683841874287, guid: 5d88a0eea776c854eab1642695f481f4, type: 3}
       propertyPath: orthographic size
-      value: 4.125
+      value: 2.96875
       objectReference: {fileID: 0}
     - target: {fileID: 464148683841874287, guid: 5d88a0eea776c854eab1642695f481f4, type: 3}
       propertyPath: m_NormalizedViewPortRect.x
@@ -131193,7 +131205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 464148683841874287, guid: 5d88a0eea776c854eab1642695f481f4, type: 3}
       propertyPath: m_NormalizedViewPortRect.height
-      value: 0.99810964
+      value: 0.9973753
       objectReference: {fileID: 0}
     - target: {fileID: 1608718587104761177, guid: 5d88a0eea776c854eab1642695f481f4, type: 3}
       propertyPath: m_LocalPosition.x
