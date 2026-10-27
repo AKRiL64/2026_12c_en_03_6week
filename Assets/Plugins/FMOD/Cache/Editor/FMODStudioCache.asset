@@ -204,7 +204,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Platforms.bank
   Name: Platforms
   StudioPath: bank:/Platforms
-  lastModified: 639281441725298382
+  lastModified: 639281300563087349
   FileSizes: []
   Exists: 1
 --- !u!114 &-2322487430125724916
@@ -307,7 +307,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 2554738150305626089}
   cacheVersion: 131861
-  cacheTime: 639281441725298382
+  cacheTime: 639281300563097497
   SerializableEventsDict:
   - key: event:/RE_AGRO
     index: 0
@@ -362,7 +362,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Menu.bank
   Name: Menu
   StudioPath: bank:/Menu
-  lastModified: 639281441725283243
+  lastModified: 639281300563075219
   FileSizes: []
   Exists: 1
 --- !u!114 &2554738150305626089
@@ -380,7 +380,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639281441725196537
+  lastModified: 639281300563075219
   FileSizes:
   - Name: 
     Value: 1790
@@ -481,7 +481,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639281441725196537
+  lastModified: 639281300563075219
   FileSizes: []
   Exists: 1
 --- !u!114 &4391319621202900439
@@ -580,7 +580,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Enemies.bank
   Name: Enemies
   StudioPath: bank:/Enemies
-  lastModified: 639281441725104691
+  lastModified: 639281300563045321
   FileSizes: []
   Exists: 1
 --- !u!114 &6522115521565199531
@@ -598,7 +598,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/Player
-  lastModified: 639281441725298382
+  lastModified: 639281300563097497
   FileSizes: []
   Exists: 1
 --- !u!114 &7109182994690172367
@@ -616,7 +616,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Interactables.bank
   Name: Interactables
   StudioPath: bank:/Interactables
-  lastModified: 639281441725119933
+  lastModified: 639281300563065252
   FileSizes: []
   Exists: 1
 --- !u!114 &7480251003609790430
