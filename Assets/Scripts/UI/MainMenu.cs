@@ -18,7 +18,10 @@ public class MainMenu: MonoBehaviour
     [SerializeField] private GameObject savesPanel;
     [SerializeField] private GameObject leaderboardPanel;
     [SerializeField] private GameObject confirmDialog;
-
+    [SerializeField] private GameObject newGamePanel;
+    [SerializeField] private Button newGameProceedButton;
+    [SerializeField] private Button newGameBackButton;
+    
     private void Start()
     {
         newGameButton.onClick.AddListener(NewGameButton);
@@ -30,12 +33,28 @@ public class MainMenu: MonoBehaviour
         savesBackButton.onClick.AddListener(SavesBackButton);
         savesContinueButton.onClick.AddListener(NewGameButton);
         exitButton.onClick.AddListener(OpenQuitDialog);
+        newGameBackButton.onClick.AddListener(NewGameBackButton);
+        newGameProceedButton.onClick.AddListener(NewGameProceed);
     }
 
     public void NewGameButton()
     {
         Debug.Log("New Game");
+        mainPanel.SetActive(false);
+        savesPanel.SetActive(false);
+        newGamePanel.SetActive(true);
+    }
+
+    private void NewGameProceed()
+    {
         SceneManager.LoadScene("Scenes/Levels/Tutorial");
+    }
+
+    private void NewGameBackButton()
+    {
+        Debug.Log("New Game Back");
+        mainPanel.SetActive(true);
+        newGamePanel.SetActive(false);
     }
 
     private void ContinueButton()
