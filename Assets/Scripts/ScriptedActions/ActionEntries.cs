@@ -20,3 +20,10 @@ public class TeleportActionEntry
     public int id;
     public ScriptedActionTeleport action;
 }
+
+[Serializable]
+public class DialogueActionEntry
+{
+    public int id;
+    public ScriptedActionDialogue action;
+}
