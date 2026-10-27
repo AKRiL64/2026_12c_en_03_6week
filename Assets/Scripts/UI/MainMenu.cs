@@ -1,5 +1,4 @@
-﻿using Unity.VectorGraphics;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -8,13 +7,17 @@ public class MainMenu: MonoBehaviour
     [SerializeField] private Button newGameButton;
     [SerializeField] private Button continueButton;
     [SerializeField] private Button settingsButton;
-    [SerializeField] private Button settingsBackButton;
-    [SerializeField] private Button leaderboardButton;
-    [SerializeField] private Button leaderboardBackButton;
     [SerializeField] private Button exitButton;
+    [SerializeField] private Button leaderboardButton;
+    [SerializeField] private Button settingsBackButton;
+    [SerializeField] private Button leaderboardBackButton;
+    [SerializeField] private Button savesBackButton;
+    [SerializeField] private Button savesContinueButton;
     [SerializeField] private GameObject mainPanel;
     [SerializeField] private GameObject settingsPanel;
+    [SerializeField] private GameObject savesPanel;
     [SerializeField] private GameObject leaderboardPanel;
+    [SerializeField] private GameObject confirmDialog;
 
     private void Start()
     {
@@ -24,10 +27,9 @@ public class MainMenu: MonoBehaviour
         settingsBackButton.onClick.AddListener(SettingsBackButton);
         leaderboardButton.onClick.AddListener(LeaderboardButton);
         leaderboardBackButton.onClick.AddListener(LeaderboardBackButton);
-        exitButton.onClick.AddListener(ExitButton);
-        
-        settingsPanel.SetActive(false);
-        leaderboardPanel.SetActive(false);
+        savesBackButton.onClick.AddListener(SavesBackButton);
+        savesContinueButton.onClick.AddListener(NewGameButton);
+        exitButton.onClick.AddListener(OpenQuitDialog);
     }
 
     public void NewGameButton()
@@ -39,7 +41,8 @@ public class MainMenu: MonoBehaviour
     private void ContinueButton()
     {
         Debug.Log("Continue");
-        SceneManager.LoadScene("Scenes/Levels/Tutorial");
+        mainPanel.SetActive(false);
+        savesPanel.SetActive(true);
     }
 
     private void SettingsButton()
@@ -69,11 +72,31 @@ public class MainMenu: MonoBehaviour
         leaderboardPanel.SetActive(false);
         mainPanel.SetActive(true);
     }
+    
+    private void SavesBackButton()
+    {
+        Debug.Log("Saves Back");
+        savesPanel.SetActive(false);
+        mainPanel.SetActive(true);
+    }
 
-    private void ExitButton()
+    public void OpenQuitDialog()
+    {
+        confirmDialog.SetActive(true);
+    }
+
+    public void CloseQuitDialog()
+    {
+        confirmDialog.SetActive(false);
+    }
+
+    public void ConfirmQuitDialog()
     {
         Debug.Log("Exiting...");
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
         Application.Quit(0);
+        #endif
     }
-    
 }
