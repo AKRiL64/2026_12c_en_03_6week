@@ -33,6 +33,9 @@ public class Gunpowder : Projectile
         gameObject.layer = launchedProjectileLayer;
         Explode();
         transform.position = _spawnPosition;
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        Rb.linearVelocity = Vector2.zero;
+        Rb.angularVelocity = 0;
     }
 
     private void Explode()
