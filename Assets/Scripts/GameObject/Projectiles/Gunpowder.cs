@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Gunpowder : Projectile
 {
+    [HideInInspector]
+    public PowderBarrel parentBarrel;
+    
     [SerializeField] private float explosionDistance = 1.5f;
     [SerializeField] private float explosionRadius = 3f;
     [SerializeField] private float explosionPower = 1.5f;
@@ -32,7 +35,7 @@ public class Gunpowder : Projectile
     {
         gameObject.layer = launchedProjectileLayer;
         Explode();
-        transform.position = _spawnPosition;
+        parentBarrel.RespawnProjectile();
     }
 
     private void Explode()

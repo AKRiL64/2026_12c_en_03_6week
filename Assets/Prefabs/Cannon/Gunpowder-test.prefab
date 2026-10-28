@@ -110,7 +110,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -171,9 +171,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gunpowder
   gravity: 1
+  leverTag: Lever
   defaultLayer: 0
   launchedProjectileLayer: 8
   flyDistance: 100
+  parentBarrel: {fileID: 0}
   explosionDistance: 1.5
   explosionRadius: 5
   explosionPower: 3
