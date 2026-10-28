@@ -53,7 +53,8 @@ public class Gunpowder : Projectile
                 //Debug.DrawLine(explosionPosition, _colliders[i].transform.position, Color.red, 1.5f);
                 Vector2 direction = ((Vector2)_colliders[i].transform.position - explosionPosition).normalized; 
                 direction *= explosionPower;
-                direction.y *= upwardsModifier; 
+                direction.y *= upwardsModifier;
+                rb.linearVelocityY = 0;
                 rb.AddForce(direction, ForceMode2D.Impulse);
             }
         }
