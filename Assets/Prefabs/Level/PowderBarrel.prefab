@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PowderBarrel
   childGunpowder: {fileID: 9181521315227125189}
   spawnPoint: {fileID: 1066106598449051197}
-  reloadTime: 2
+  reloadTime: 2.1
 --- !u!1001 &4599072413605311685
 PrefabInstance:
   m_ObjectHideFlags: 0
