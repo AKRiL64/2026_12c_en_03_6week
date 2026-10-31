@@ -55,7 +55,8 @@ public static class SaveManager
         _objectsMeta = 0;
 
         Directory.CreateDirectory(SaveDirectory);
-        name = SaveFilename;
+        name = String.IsNullOrWhiteSpace(SaveFilename) || String.IsNullOrEmpty(SaveFilename) || SaveFilename.Length == 1 ?  DefaultFilename : SaveFilename;
+        //Debug.Log($"{String.IsNullOrWhiteSpace(SaveFilename)} - {String.IsNullOrEmpty(SaveFilename)}");
         string filepath = name == null ? SaveDirectory + "/" + DateTime.Now.Date : SaveDirectory + "/" + name;
         
         try
