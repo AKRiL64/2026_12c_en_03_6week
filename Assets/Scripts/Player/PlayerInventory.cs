@@ -39,6 +39,7 @@ public class PlayerInventory : MonoBehaviour
     private void CollectCoin(CoinType type)
     {
         int delta = CoinValues.Coins.GetValueOrDefault(type, 0);
+        Score += CoinValues.ScoreValue[type];
         type = type == CoinType.Diamond ? CoinType.Diamond : CoinType.Coin;
         UpdateCollectibles(type, delta);
     }
@@ -56,7 +57,6 @@ public class PlayerInventory : MonoBehaviour
             return;
         CollectiblesEvents.CollectiblesChanged(type, CollectiblesCount[type], delta);
         CollectiblesCount[type] += delta;
-
 
         switch (type)
         {
