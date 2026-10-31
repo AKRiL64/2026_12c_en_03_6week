@@ -2171,7 +2171,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &514805275
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3651,6 +3651,11 @@ MonoBehaviour:
   - {fileID: 2076340336}
   - {fileID: 1783250006}
   - {fileID: 1448553673}
+  deleteButtons:
+  - {fileID: 1343758387}
+  - {fileID: 2003271137}
+  - {fileID: 1236973600}
+  - {fileID: 1889805295}
 --- !u!1 &761483563
 GameObject:
   m_ObjectHideFlags: 0
@@ -5804,6 +5809,7 @@ GameObject:
   - component: {fileID: 1236973602}
   - component: {fileID: 1236973601}
   - component: {fileID: 1236973600}
+  - component: {fileID: 1236973603}
   m_Layer: 5
   m_Name: Arrow3
   m_TagString: Untagged
@@ -5913,6 +5919,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1236973598}
   m_CullTransparentMesh: 1
+--- !u!114 &1236973603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236973598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c0f39da66a7c1b6b8ee1a1e725fd6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDeleter
 --- !u!1 &1254857527
 GameObject:
   m_ObjectHideFlags: 0
@@ -6201,6 +6219,7 @@ GameObject:
   - component: {fileID: 1343758386}
   - component: {fileID: 1343758385}
   - component: {fileID: 1343758387}
+  - component: {fileID: 1343758388}
   m_Layer: 5
   m_Name: Arrow1
   m_TagString: Untagged
@@ -6310,6 +6329,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1343758388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343758383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c0f39da66a7c1b6b8ee1a1e725fd6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDeleter
 --- !u!1 &1393976482
 GameObject:
   m_ObjectHideFlags: 0
@@ -9375,6 +9406,7 @@ GameObject:
   - component: {fileID: 1889805297}
   - component: {fileID: 1889805296}
   - component: {fileID: 1889805295}
+  - component: {fileID: 1889805298}
   m_Layer: 5
   m_Name: Arrow4
   m_TagString: Untagged
@@ -9484,6 +9516,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889805293}
   m_CullTransparentMesh: 1
+--- !u!114 &1889805298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1889805293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c0f39da66a7c1b6b8ee1a1e725fd6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDeleter
 --- !u!1 &1897233205
 GameObject:
   m_ObjectHideFlags: 0
@@ -10130,6 +10174,7 @@ GameObject:
   - component: {fileID: 2003271139}
   - component: {fileID: 2003271138}
   - component: {fileID: 2003271137}
+  - component: {fileID: 2003271140}
   m_Layer: 5
   m_Name: Arrow2
   m_TagString: Untagged
@@ -10239,6 +10284,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2003271135}
   m_CullTransparentMesh: 1
+--- !u!114 &2003271140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003271135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c0f39da66a7c1b6b8ee1a1e725fd6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveDeleter
 --- !u!1 &2008130713
 GameObject:
   m_ObjectHideFlags: 0
