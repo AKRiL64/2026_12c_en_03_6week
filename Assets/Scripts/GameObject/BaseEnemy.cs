@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public abstract class BaseEnemy : MonoBehaviour
@@ -7,7 +8,8 @@ public abstract class BaseEnemy : MonoBehaviour
     {
         Idle,
         Chasing,
-        Attacking
+        Attacking,
+        Falling
     }
 
     protected EnemyState state = EnemyState.Idle;
@@ -43,6 +45,10 @@ public abstract class BaseEnemy : MonoBehaviour
             case EnemyState.Attacking:
                 HandleAttacking();
                 break;
+            
+            case EnemyState.Falling:
+                HandleFalling();
+                break;
         }
     }
 
@@ -73,6 +79,11 @@ public abstract class BaseEnemy : MonoBehaviour
     {
     }
 
+    protected virtual void HandleFalling()
+    {
+        
+    }
+
     protected virtual void FindPlayer()
     {
         Collider2D hit = Physics2D.OverlapCircle(
@@ -101,5 +112,18 @@ public abstract class BaseEnemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, detectionRange);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, forgetRange);
+    }
+
+    public virtual void StopMoving()
+    {
+        state = EnemyState.Falling;
+        rb.linearVelocity = Vector2.zero;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Cannon") || collision.gameObject.CompareTag("Player"))
+            return;
+        state = EnemyState.Idle;
     }
 }
