@@ -12,7 +12,7 @@ public class Gunpowder : Projectile
     [SerializeField] private int maxCollidersCount = 32;
     [SerializeField] private LayerMask affectedLayers;
     private ContactFilter2D _contactFilter;
-
+    
     private LayerMask _raycastMask;
     
     private Vector2 _spawnPosition;

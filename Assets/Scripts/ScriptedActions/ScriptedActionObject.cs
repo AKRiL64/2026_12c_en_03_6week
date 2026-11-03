@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class CutsceneObject: MonoBehaviour
+public class ScriptedActionObject: MonoBehaviour
 {
     public DialogueBubble dialogueBubble;
     
@@ -27,7 +27,7 @@ public class CutsceneObject: MonoBehaviour
             if (entry.trigger != null)
             {
                 triggers[entry.trigger] = entry.actionId;
-                entry.trigger.CutsceneObject = this;
+                entry.trigger.scriptedActionObject = this;
             }
         }
 
@@ -36,7 +36,7 @@ public class CutsceneObject: MonoBehaviour
             if (entry.action != null)
             {
                 moveActions[entry.id] = entry.action;
-                entry.action.CutsceneObject = this;
+                entry.action.ScriptedActionObject = this;
             }
         }
 
@@ -45,7 +45,7 @@ public class CutsceneObject: MonoBehaviour
             if (entry.action != null) 
             {
                 teleportActions[entry.id] = entry.action;
-                entry.action.CutsceneObject = this;
+                entry.action.ScriptedActionObject = this;
             }
         }
         
@@ -56,7 +56,7 @@ public class CutsceneObject: MonoBehaviour
                 Debug.Log("Adding dialogue action " + entry.action.DialogueText);
                 Debug.Log("Dialogue action ID: " + entry.id);
                 dialogueActions[entry.id] = entry.action;
-                entry.action.CutsceneObject = this;
+                entry.action.ScriptedActionObject = this;
             }
         }
 

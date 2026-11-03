@@ -65,25 +65,20 @@ public class PlayerController: MonoBehaviour
     
     private void Update()
     {
-        //Applies speed in the move input direction
         Move();
-        
-        PlayFootstepSound();
-        
-        PlayLandingSound();
-        
-        //Updates Coyote Time and Jump Input Buffer
+
+        UpdateGroundedState();
+
         UpdateBuffers();
 
-        UpdateGroundedState(); 
+        PlayFootstepSound();
 
-        //Executes jump if all conditions for it are met
+        PlayLandingSound();
+
         TryToJump();
 
-        //Switches between different gravity modifiers based on Y movement direction
         ChangeGravityModifier();
-        
-        //Update last position on the ground
+
         UpdateLastPosition();
     }
 
@@ -146,6 +141,11 @@ public class PlayerController: MonoBehaviour
     }
     private bool IsOnTheFloor() 
     {
+        if (rb.linearVelocityY > 0.01f)
+        {
+            return false;
+        }
+        
         Bounds bounds = playerCollider.bounds;
         
         Vector2 groundCheckPoint = new Vector2(

@@ -2,6 +2,6 @@
 
 public abstract class ScriptedAction
 {
-    public CutsceneObject CutsceneObject;
+    public ScriptedActionObject ScriptedActionObject;
     public abstract void Execute(GameObject obj);
 }
