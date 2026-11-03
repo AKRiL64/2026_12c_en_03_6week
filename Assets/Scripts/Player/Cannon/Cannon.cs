@@ -138,6 +138,8 @@ public class Cannon : MonoBehaviour
         projectile.GetComponent<Projectile>().Launch(launchForce);
         projectile = null;
         
+        SwallowedObjectCell.Instance.ChangeSprite(null);
+        
         RuntimeManager.PlayOneShot("event:/CANNON_SPIT", transform.position);
     }
 
@@ -171,7 +173,17 @@ public class Cannon : MonoBehaviour
         
         _actions.Player.Pull.canceled -= CancelPulling;
         _actions.Player.Attack.Enable();
-        
+
+        if (proj.TryGetComponent<SpriteRenderer>(out SpriteRenderer spriteRenderer))
+        {
+            SwallowedObjectCell.Instance.ChangeSprite(spriteRenderer.sprite);
+        }
+        else
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            SwallowedObjectCell.Instance.ChangeSprite(spriteRenderer.sprite);
+        }
+
         RuntimeManager.PlayOneShot("event:/CANNON_SWALLOW",  transform.position);
     }
 
