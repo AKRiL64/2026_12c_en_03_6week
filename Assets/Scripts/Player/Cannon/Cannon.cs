@@ -244,6 +244,9 @@ public class Cannon : MonoBehaviour
     {
         _collider.enabled = true;
         
+        if (hit.collider.gameObject.TryGetComponent<BaseEnemy>(out BaseEnemy enemy))
+            enemy.StopMoving();
+        
         Projectile proj = hit.collider.GetComponent<Projectile>();
         if (proj != null)
             proj.StartSwallowing();
