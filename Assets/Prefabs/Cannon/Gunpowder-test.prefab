@@ -174,11 +174,11 @@ MonoBehaviour:
   leverTag: Lever
   defaultLayer: 0
   launchedProjectileLayer: 8
-  flyDistance: 100
+  flyDistance: 500
   parentBarrel: {fileID: 0}
   explosionDistance: 1.5
-  explosionRadius: 5
-  explosionPower: 3
+  explosionRadius: 2
+  explosionPower: 6
   upwardsModifier: 1.5
   maxCollidersCount: 32
   affectedLayers:
