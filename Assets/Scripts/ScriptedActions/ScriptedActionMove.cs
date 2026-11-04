@@ -11,7 +11,7 @@ public class ScriptedActionMove: ScriptedAction
 
     public override void Execute(GameObject obj)
     {
-        CutsceneObject.StartCoroutine(MoveObject(obj));
+        ScriptedActionObject.StartCoroutine(MoveObject(obj));
     }
 
     IEnumerator MoveObject(GameObject obj)

@@ -25,6 +25,7 @@ public class Checkpoint : MonoBehaviour
             SaveManager.Save(CheckpointCounter);
             
             RuntimeManager.PlayOneShot("event:/CHECKPOINT", transform.position);
+            checkpointSequentialNumber = -1;
         }
     }
 

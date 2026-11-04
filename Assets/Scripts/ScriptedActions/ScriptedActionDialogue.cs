@@ -11,12 +11,12 @@ public class ScriptedActionDialogue: ScriptedAction
     {
         if (ShowDialogueBubble)
         {
-            CutsceneObject.dialogueBubble.SetText(DialogueText);
-            CutsceneObject.dialogueBubble.Show();
+            ScriptedActionObject.dialogueBubble.SetText(DialogueText);
+            ScriptedActionObject.dialogueBubble.Show();
         }
         else
         {
-            CutsceneObject.dialogueBubble.Hide();
+            ScriptedActionObject.dialogueBubble.Hide();
         }
     }
 }
