@@ -55,6 +55,8 @@ public static class SaveManager
         _objectsMeta = 0;
 
         Directory.CreateDirectory(SaveDirectory);
+        name = String.IsNullOrWhiteSpace(SaveFilename) || String.IsNullOrEmpty(SaveFilename) || SaveFilename.Length == 1 ?  DefaultFilename : SaveFilename;
+        //Debug.Log($"{String.IsNullOrWhiteSpace(SaveFilename)} - {String.IsNullOrEmpty(SaveFilename)}");
         string filepath = name == null ? SaveDirectory + "/" + DateTime.Now.Date : SaveDirectory + "/" + name;
         
         try
@@ -281,7 +283,7 @@ public static class SaveManager
 
     private static void SetupPlayer()
     {
-//        _playerInventory.UpdateScore((int)_score);
+        //_playerInventory.UpdateScore((int)_score);
         _playerInventory.UpdateCoinbar();
         _playerInventory.UpdateCollectibles(CoinType.Coin, (int)_coins);
         _playerInventory.UpdateCollectibles(CoinType.Diamond, (int)_diamonds);
