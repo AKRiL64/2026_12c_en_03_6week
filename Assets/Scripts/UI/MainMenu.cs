@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ public class MainMenu: MonoBehaviour
     [SerializeField] private GameObject newGamePanel;
     [SerializeField] private Button newGameProceedButton;
     [SerializeField] private Button newGameBackButton;
+    [SerializeField] private TextMeshProUGUI newGameNameField;
     
     private void Start()
     {
@@ -47,6 +49,8 @@ public class MainMenu: MonoBehaviour
 
     private void NewGameProceed()
     {
+        SaveManager.SaveFilename = newGameNameField.text;
+        Debug.Log(SaveManager.SaveFilename);
         SceneManager.LoadScene("Scenes/Levels/Tutorial");
     }
 
