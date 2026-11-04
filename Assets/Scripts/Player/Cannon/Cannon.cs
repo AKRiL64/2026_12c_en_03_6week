@@ -196,6 +196,16 @@ public class Cannon : MonoBehaviour
 
     private void LaunchProjectile()
     {
+
+        _collider.enabled = false;
+        isPullHeld = false;
+        currentlyPulledCollider = null;
+        if (pullDetectionCoroutine != null)
+        {
+            StopCoroutine(pullDetectionCoroutine);
+            pullDetectionCoroutine = null;
+        }
+
         Follower follower = projectile.GetComponent<Follower>();
         
         PositionProjectile();
@@ -229,7 +239,14 @@ public class Cannon : MonoBehaviour
     private void CatchProjectile(Collider2D other)
     {
         _collider.enabled = false;
-        
+        isPullHeld = false;
+        currentlyPulledCollider = null;
+        if (pullDetectionCoroutine != null)
+        {
+            StopCoroutine(pullDetectionCoroutine);
+            pullDetectionCoroutine = null;
+        }
+
         StopSuckEffects();
         
         GameObject proj = other.gameObject;
