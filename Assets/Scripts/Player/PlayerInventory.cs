@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,11 @@ public class PlayerInventory : MonoBehaviour
 
     [SerializeField] private CoinBar coinBar;
     [SerializeField] private DiamondCounter diamondCounter;
+
+    private void Awake()
+    {
+        SaveManager.SetPlayerInventory(this);
+    }
 
     void Start()
     {

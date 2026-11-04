@@ -60,6 +60,7 @@ public class PlayerController: MonoBehaviour
     {
         _lastPosition = transform.position;
         _currentHp = MaxHp;
+        HpBar.Instance.ChangeHp(_currentHp, MaxHp);
         _wasOnFloor = IsOnTheFloor();
     }
     
@@ -230,6 +231,7 @@ public class PlayerController: MonoBehaviour
         RuntimeManager.PlayOneShot("event:/TAKE_DMG", transform.position);
         
         _currentHp = Math.Clamp(_currentHp - damage, 0, MaxHp);
+        HpBar.Instance.ChangeHp(_currentHp, MaxHp);
         if (_currentHp <= 0)
         {
             SaveManager.Load(SaveManager.SaveFilename);
