@@ -16,7 +16,7 @@ public class CollapsePlatform: MonoBehaviour
     {
         if (_falling) return;
         
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && ((collision.transform.position.y - transform.position.y) > 0))
         {
             StartCoroutine(CollapseCoroutine());
             
