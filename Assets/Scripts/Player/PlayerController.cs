@@ -60,30 +60,26 @@ public class PlayerController: MonoBehaviour
     {
         _lastPosition = transform.position;
         _currentHp = MaxHp;
+        HpBar.Instance.ChangeHp(_currentHp, MaxHp);
         _wasOnFloor = IsOnTheFloor();
     }
     
     private void Update()
     {
-        //Applies speed in the move input direction
         Move();
-        
-        PlayFootstepSound();
-        
-        PlayLandingSound();
-        
-        //Updates Coyote Time and Jump Input Buffer
+
+        UpdateGroundedState();
+
         UpdateBuffers();
 
-        UpdateGroundedState(); 
+        PlayFootstepSound();
 
-        //Executes jump if all conditions for it are met
+        PlayLandingSound();
+
         TryToJump();
 
-        //Switches between different gravity modifiers based on Y movement direction
         ChangeGravityModifier();
-        
-        //Update last position on the ground
+
         UpdateLastPosition();
     }
 
@@ -146,6 +142,11 @@ public class PlayerController: MonoBehaviour
     }
     private bool IsOnTheFloor() 
     {
+        if (rb.linearVelocityY > 0.01f)
+        {
+            return false;
+        }
+        
         Bounds bounds = playerCollider.bounds;
         
         Vector2 groundCheckPoint = new Vector2(
@@ -230,6 +231,7 @@ public class PlayerController: MonoBehaviour
         RuntimeManager.PlayOneShot("event:/TAKE_DMG", transform.position);
         
         _currentHp = Math.Clamp(_currentHp - damage, 0, MaxHp);
+        HpBar.Instance.ChangeHp(_currentHp, MaxHp);
         if (_currentHp <= 0)
         {
             SaveManager.Load(SaveManager.SaveFilename);

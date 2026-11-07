@@ -73,6 +73,7 @@ public class Projectile : MonoBehaviour
             
             lever.NoConditionPull();
         }
+        
         Stop();
     }
 
@@ -81,6 +82,9 @@ public class Projectile : MonoBehaviour
         if (other.gameObject.CompareTag("Cannon"))
             return;
 
+        
+        Debug.Log(other.gameObject.name);
+        
         Stop();
     }
 

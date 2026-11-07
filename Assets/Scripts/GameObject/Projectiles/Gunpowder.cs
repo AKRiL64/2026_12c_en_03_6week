@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Gunpowder : Projectile
 {
+    [HideInInspector]
+    public PowderBarrel parentBarrel;
+    
     [SerializeField] private float explosionDistance = 1.5f;
     [SerializeField] private float explosionRadius = 3f;
     [SerializeField] private float explosionPower = 1.5f;
@@ -9,7 +12,7 @@ public class Gunpowder : Projectile
     [SerializeField] private int maxCollidersCount = 32;
     [SerializeField] private LayerMask affectedLayers;
     private ContactFilter2D _contactFilter;
-
+    
     private LayerMask _raycastMask;
     
     private Vector2 _spawnPosition;
@@ -32,7 +35,13 @@ public class Gunpowder : Projectile
     {
         gameObject.layer = launchedProjectileLayer;
         Explode();
+        parentBarrel.RespawnProjectile();
+		/*
         transform.position = _spawnPosition;
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        Rb.linearVelocity = Vector2.zero;
+        Rb.angularVelocity = 0;
+		*/
     }
 
     private void Explode()
@@ -50,7 +59,8 @@ public class Gunpowder : Projectile
                 //Debug.DrawLine(explosionPosition, _colliders[i].transform.position, Color.red, 1.5f);
                 Vector2 direction = ((Vector2)_colliders[i].transform.position - explosionPosition).normalized; 
                 direction *= explosionPower;
-                direction.y *= upwardsModifier; 
+                direction.y *= upwardsModifier;
+                rb.linearVelocityY = 0;
                 rb.AddForce(direction, ForceMode2D.Impulse);
             }
         }

@@ -7,16 +7,16 @@ public class TurretEnemy : BaseEnemy
     [SerializeField] private Transform shootPoint;
 
     [SerializeField] private GameObject projectile;
-    [SerializeField] private float attackRange = 8f;
-    [SerializeField] private float rotationSpeed = 180f;
-    [SerializeField] private float attackCooldown = 1f;
-    [SerializeField] private float chargeTime = 0.5f;
-    [SerializeField] private float squishAmount = 0.7f;
+    [SerializeField] protected float attackRange = 8f;
+    [SerializeField] protected float rotationSpeed = 180f;
+    [SerializeField] protected float attackCooldown = 1f;
+    [SerializeField] protected float chargeTime = 0.5f;
+    [SerializeField] protected float squishAmount = 0.7f;
 
-    private float attackTimer;
-    private float chargeTimer;
-    private bool isCharging;
-    private Vector3 originalScale;
+    protected float attackTimer;
+    protected float chargeTimer;
+    protected bool isCharging;
+    protected Vector3 originalScale;
     protected override void Awake()
     {
         base.Awake();
@@ -107,7 +107,7 @@ public class TurretEnemy : BaseEnemy
         AimAtTarget();
     }
 
-    private void AimAtTarget()
+    protected void AimAtTarget()
     {
         if (target == null || weapon == null)
             return;
@@ -127,7 +127,7 @@ public class TurretEnemy : BaseEnemy
         );
     }
 
-    private void Attack()
+    protected void Attack()
     {
         Instantiate(projectile, shootPoint.position, weapon.rotation);
     }

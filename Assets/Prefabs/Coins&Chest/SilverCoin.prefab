@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
   type: 1
+  pickupEffect: {fileID: 8559636856769424603, guid: 5bc1a490ea8d24c498dacdf069c3dbb1, type: 3}
 --- !u!58 &6513944210963375812
 CircleCollider2D:
   m_ObjectHideFlags: 0

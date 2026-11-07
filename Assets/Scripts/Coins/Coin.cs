@@ -7,6 +7,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     [SerializeField] public CoinType type;
+    [SerializeField] private GameObject pickupEffect;
 
     private Animator anim;
     private Collider2D coinCollider;
@@ -27,26 +28,8 @@ public class Coin : MonoBehaviour
 
         CollectiblesEvents.CoinCollected(type);
         anim.SetTrigger("pickup");
-
-        StartCoroutine(DestroyAfterAnimation());
-    }
-
-    private IEnumerator DestroyAfterAnimation()
-    {
-        yield return null;
-
-        while (!anim.GetCurrentAnimatorStateInfo(0).IsName("pickup"))
-        {
-            yield return null;
-        }
-
-        while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
-        {
-            yield return null;
-        }
-
-        Destroy(gameObject);
-        
+        Instantiate(pickupEffect, transform.position, Quaternion.identity);
         RuntimeManager.PlayOneShot("event:/COINS", transform.position);
+        Destroy(gameObject);
     }
 }
