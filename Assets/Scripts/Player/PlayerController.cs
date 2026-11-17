@@ -202,7 +202,7 @@ public class PlayerController: MonoBehaviour
             return;
         }
         _distanceSinceFootstep += speed * Time.deltaTime;
-        if (_distanceSinceFootstep >= 2f)
+        if (_distanceSinceFootstep >= 1.5f)
         {
             _distanceSinceFootstep = 0f;
             RuntimeManager.PlayOneShot("event:/FOOTSTEPS", transform.position);
