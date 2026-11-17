@@ -199,10 +199,10 @@ public class PlayerController: MonoBehaviour
         if (!IsOnTheFloor() || speed < 0.1f)
         {
             _distanceSinceFootstep = 0f;
-            return;
+        return;
         }
         _distanceSinceFootstep += speed * Time.deltaTime;
-        if (_distanceSinceFootstep >= 2f)
+        if (_distanceSinceFootstep >= 1.5f)
         {
             _distanceSinceFootstep = 0f;
             RuntimeManager.PlayOneShot("event:/FOOTSTEPS", transform.position);
