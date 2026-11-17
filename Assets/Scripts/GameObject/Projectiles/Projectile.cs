@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected int defaultLayer = 0;
     [SerializeField] protected int launchedProjectileLayer = 8;
     [SerializeField] protected float flyDistance = 100f;
+    [SerializeField] private int gravityScaleWhenLaunched = 1;
     protected Vector2 InitialPosition;
     protected bool IsLaunched = false;
     
@@ -55,7 +56,7 @@ public class Projectile : MonoBehaviour
     {
         gameObject.layer = launchedProjectileLayer;
         Rb.bodyType = RigidbodyType2D.Dynamic;
-        Rb.gravityScale = gravity ? 1 : 0;
+        Rb.gravityScale = gravity ? gravityScaleWhenLaunched : 0;
         
         InitialPosition = transform.position;
         IsLaunched = true;
@@ -94,7 +95,7 @@ public class Projectile : MonoBehaviour
         Rb.linearVelocityX = 0;
         gameObject.layer = defaultLayer;
         IsLaunched = false;
-        Rb.gravityScale = 1;
+        Rb.gravityScale = gravityScaleWhenLaunched;
     }
 
     public virtual void StartSwallowing()
@@ -102,6 +103,6 @@ public class Projectile : MonoBehaviour
         IsLaunched = false;
         gameObject.layer = defaultLayer;
         Rb.linearVelocity = Vector2.zero;
-        Rb.gravityScale = 1;
+        Rb.gravityScale = gravityScaleWhenLaunched;
     }
 }

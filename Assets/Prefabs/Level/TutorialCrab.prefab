@@ -100,7 +100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5134955615280159724}
-  - component: {fileID: 4790949755121882742}
+  - component: {fileID: 1715884291734832141}
   - component: {fileID: 4365224313726868883}
   - component: {fileID: 403758636595687534}
   m_Layer: 0
@@ -127,7 +127,7 @@ Transform:
   - {fileID: 4120935440743952957}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4790949755121882742
+--- !u!114 &1715884291734832141
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,15 +136,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7125014346582451642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba324ccafb44e70afb60f045dd3dde4a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0328171cac0b8e444a39b75d7839524c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FierceTooth
+  m_EditorClassIdentifier: Assembly-CSharp::TutorialCrab
   gravity: 1
   leverTag: Lever
   defaultLayer: 0
   launchedProjectileLayer: 8
   flyDistance: 100
   rotationSpeed: 1
+  fierceToothToDisable: {fileID: 1715884291734832141}
 --- !u!50 &4365224313726868883
 Rigidbody2D:
   serializedVersion: 5
