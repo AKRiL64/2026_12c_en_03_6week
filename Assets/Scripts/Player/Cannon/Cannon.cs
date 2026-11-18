@@ -20,6 +20,7 @@ public class Cannon : MonoBehaviour
 
     [SerializeField] private float detectionInterval = 0.1f;
 
+    private bool canSwallow = true;
     private bool isPullHeld;
     
     private InputSystem_Actions _actions;
@@ -37,7 +38,7 @@ public class Cannon : MonoBehaviour
         _actions.Player.Attack.Disable();
         _actions.Player.Pull.Enable();
         
-        _pullLayerMask = ~LayerMask.GetMask("Player");
+        _pullLayerMask = ~LayerMask.GetMask("Player", "Ignore Raycast");
         if(_collider == null)
             _collider = GetComponent<Collider2D>();
         dynamicCamera = Camera.main.GetComponent<DynamicCamera>();
@@ -112,7 +113,7 @@ public class Cannon : MonoBehaviour
                     currentlyPulledCollider = null;
                 }
             }
-            else if (hit.collider != null)
+            else if (hit.collider != null && canSwallow)
             {
                 IPullable pullable = hit.collider.GetComponent<IPullable>();
 
@@ -202,10 +203,20 @@ public class Cannon : MonoBehaviour
         projectile.SetActive(true);
         projectile.GetComponent<Projectile>().Launch(launchForce);
         projectile = null;
+
+        StartCoroutine(SwallowReload(0.2f));
+        
         
         SwallowedObjectCell.Instance.ChangeSprite(null);
         
         RuntimeManager.PlayOneShot("event:/CANNON_SPIT", transform.position);
+    }
+
+    private IEnumerator SwallowReload(float time) //TODO: this is a placeholder. Instead, detect the release of the button for pulling
+    {
+        canSwallow = false;
+        yield return new WaitForSeconds(time);
+        canSwallow = true;
     }
 
     private void PositionProjectile()

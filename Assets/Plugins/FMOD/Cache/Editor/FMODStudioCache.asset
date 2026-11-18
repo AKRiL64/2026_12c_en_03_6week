@@ -204,7 +204,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Platforms.bank
   Name: Platforms
   StudioPath: bank:/Platforms
-  lastModified: 639281300563087349
+  lastModified: 639305903945837608
   FileSizes: []
   Exists: 1
 --- !u!114 &-2322487430125724916
@@ -307,7 +307,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 2554738150305626089}
   cacheVersion: 131861
-  cacheTime: 639287308164892220
+  cacheTime: 639305903945847987
   SerializableEventsDict:
   - key: event:/RE_AGRO
     index: 0
@@ -580,7 +580,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Enemies.bank
   Name: Enemies
   StudioPath: bank:/Enemies
-  lastModified: 639287308164840406
+  lastModified: 639305903945798314
   FileSizes: []
   Exists: 1
 --- !u!114 &6522115521565199531
@@ -598,7 +598,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Player.bank
   Name: Player
   StudioPath: bank:/Player
-  lastModified: 639287308164892220
+  lastModified: 639305903945847987
   FileSizes: []
   Exists: 1
 --- !u!114 &7109182994690172367
@@ -616,7 +616,7 @@ MonoBehaviour:
   Path: FMOD/Desktop/Interactables.bank
   Name: Interactables
   StudioPath: bank:/Interactables
-  lastModified: 639287308164855389
+  lastModified: 639305903945823551
   FileSizes: []
   Exists: 1
 --- !u!114 &7480251003609790430
