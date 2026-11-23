@@ -477,6 +477,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7620896389296387633, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
+      propertyPath: onVisual
+      value: 
+      objectReference: {fileID: 1141545250}
     - target: {fileID: 7993070415689403902, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
       propertyPath: m_Name
       value: CollapsePlatform (7)
@@ -628,6 +632,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7620896389296387633, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
+      propertyPath: onVisual
+      value: 
+      objectReference: {fileID: 596978974}
     - target: {fileID: 7993070415689403902, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
       propertyPath: m_Name
       value: CollapsePlatform (6)
@@ -917,11 +925,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1840973717692189787, guid: 2ac7c4969aa10344a8ffc90c33cafaf4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.96
+      value: 100.66
       objectReference: {fileID: 0}
     - target: {fileID: 1840973717692189787, guid: 2ac7c4969aa10344a8ffc90c33cafaf4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 88.59
+      value: 58.19
       objectReference: {fileID: 0}
     - target: {fileID: 1840973717692189787, guid: 2ac7c4969aa10344a8ffc90c33cafaf4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -66843,12 +66851,24 @@ PrefabInstance:
       value: Key-test
       objectReference: {fileID: 0}
     - target: {fileID: 5620966627820769005, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6845611
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620966627820769005, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6845611
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620966627820769005, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6845611
+      objectReference: {fileID: 0}
+    - target: {fileID: 5620966627820769005, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 118.94
+      value: 118.987
       objectReference: {fileID: 0}
     - target: {fileID: 5620966627820769005, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 58.99
+      value: 59.07
       objectReference: {fileID: 0}
     - target: {fileID: 5620966627820769005, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
       propertyPath: m_LocalPosition.z
@@ -66881,6 +66901,22 @@ PrefabInstance:
     - target: {fileID: 5620966627820769005, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689102221842045408, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -855298285791758126, guid: d05f50db81b76364c84a068ebb7a4228, type: 3}
+    - target: {fileID: 8689102221842045408, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689102221842045408, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8689102221842045408, guid: 1ebae798f4660ca868ffbfbdeb0d1f01, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -69076,6 +69112,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7620896389296387633, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
+      propertyPath: onVisual
+      value: 
+      objectReference: {fileID: 1325697796}
     - target: {fileID: 7993070415689403902, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
       propertyPath: m_Name
       value: CollapsePlatform (1)
@@ -73945,6 +73985,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7620896389296387633, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
+      propertyPath: onVisual
+      value: 
+      objectReference: {fileID: 752625816}
     - target: {fileID: 7993070415689403902, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
       propertyPath: m_Name
       value: CollapsePlatform (4)
@@ -74071,6 +74115,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7620896389296387633, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
+      propertyPath: onVisual
+      value: 
+      objectReference: {fileID: 1016030626}
     - target: {fileID: 7993070415689403902, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
       propertyPath: m_Name
       value: CollapsePlatform (5)
@@ -77067,6 +77115,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7620896389296387633, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
+      propertyPath: onVisual
+      value: 
+      objectReference: {fileID: 1463322858}
     - target: {fileID: 7993070415689403902, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
       propertyPath: m_Name
       value: CollapsePlatform (8)
@@ -78059,7 +78111,7 @@ PrefabInstance:
     - target: {fileID: 7620896389296387633, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
       propertyPath: onVisual
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 640359872}
     - target: {fileID: 7993070415689403902, guid: 1274947f46cb85c449161d30606da9f3, type: 3}
       propertyPath: m_Name
       value: CollapsePlatform (3)
