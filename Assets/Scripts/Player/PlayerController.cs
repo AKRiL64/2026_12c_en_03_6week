@@ -10,6 +10,7 @@ public class PlayerController: MonoBehaviour
     [SerializeField] private SpriteRenderer visuals;
     private bool _wasGrounded;
     private bool _isGrounded;
+    private bool _isSafelyGrounded;
     [SerializeField] private Animator animator;
     [SerializeField] private BoxCollider2D playerCollider;
     //TODO: change Rigidbody with Character Controller
@@ -21,6 +22,7 @@ public class PlayerController: MonoBehaviour
     //For ground check
     [SerializeField] private float groundCheckDistance = 0.05f;
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private LayerMask unsafeGroundLayer;
     
     //To change the jump curve
     [SerializeField] private float gravityModifierUp = 1.2f;
@@ -103,9 +105,11 @@ public class PlayerController: MonoBehaviour
 
     private void UpdateLastPosition()
     {
-        if (IsOnTheFloor())
+        bool isOnFloor = IsOnTheFloor();
+
+        if (isOnFloor && _isSafelyGrounded)
         {
-            _lastPosition =  transform.position;
+            _lastPosition = transform.position;
         }
     }
 
@@ -135,7 +139,7 @@ public class PlayerController: MonoBehaviour
     private void UpdateGroundedState()
     {
         _isGrounded = IsOnTheFloor();
-
+        
         animator.SetBool("grounded", _isGrounded);
 
         _wasGrounded = _isGrounded;
@@ -158,13 +162,28 @@ public class PlayerController: MonoBehaviour
             bounds.size.x * 0.8f,
             groundCheckDistance
         );
-
-        return Physics2D.OverlapBox(
+        
+        bool isGrounded = Physics2D.OverlapBox(
             groundCheckPoint,
             groundCheckSize,
             0f,
             groundLayer
         );
+
+        if (isGrounded)
+        {
+            _isSafelyGrounded = !Physics2D.OverlapBox(
+                groundCheckPoint,
+                groundCheckSize,
+                0f,
+                unsafeGroundLayer);
+        }
+        else
+        {
+            _isSafelyGrounded = false;
+        }
+
+        return isGrounded;
     }
 
     private void TryToJump()

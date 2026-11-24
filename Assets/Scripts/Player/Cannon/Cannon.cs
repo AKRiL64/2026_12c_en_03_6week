@@ -157,6 +157,11 @@ public class Cannon : MonoBehaviour
             pullDetectionCoroutine = null;
         }
 
+        if (!canSwallow)
+        {
+            canSwallow = true;
+        }
+
         StopSuckEffects();
 
         OnPullableRelease?.Invoke();
@@ -204,20 +209,13 @@ public class Cannon : MonoBehaviour
         projectile.GetComponent<Projectile>().Launch(launchForce);
         projectile = null;
 
-        StartCoroutine(SwallowReload(0.2f));
-        
+        canSwallow = false;
         
         SwallowedObjectCell.Instance.ChangeSprite(null);
         
         RuntimeManager.PlayOneShot("event:/CANNON_SPIT", transform.position);
     }
-
-    private IEnumerator SwallowReload(float time) //TODO: this is a placeholder. Instead, detect the release of the button for pulling
-    {
-        canSwallow = false;
-        yield return new WaitForSeconds(time);
-        canSwallow = true;
-    }
+    
 
     private void PositionProjectile()
     {

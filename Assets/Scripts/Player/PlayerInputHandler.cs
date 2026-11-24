@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour
 {
     private InputSystem_Actions input;
+    
+    public Action jumpPressed;
     
     public Vector2 InputVector {
         get; private set; 
@@ -34,6 +37,10 @@ public class PlayerInputHandler : MonoBehaviour
         InputVector = input.Player.Move.ReadValue<Vector2>();
 
         JumpPressed = input.Player.Jump.WasPressedThisFrame();
+        if (JumpPressed)
+        {
+            jumpPressed?.Invoke();
+        }
     }   
     
 }

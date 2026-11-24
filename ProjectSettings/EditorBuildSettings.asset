@@ -15,11 +15,26 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/MainMenu.unity
     guid: 0829d1c5d00d83c4ba383cf309230031
   - enabled: 1
+    path: Assets/Scenes/DialogueScenes/IntroDialogue.unity
+    guid: b5694c16ac54c1243974c6849c622de0
+  - enabled: 1
     path: Assets/Scenes/Levels/Tutorial.unity
     guid: 510c7c478b84cec45a6bf4ab25687a5d
   - enabled: 1
+    path: Assets/Scenes/DialogueScenes/TutorialClearD.unity
+    guid: cdbba94419a26cc4cb0f68076b7b0063
+  - enabled: 1
     path: Assets/Scenes/Levels/Level 1.unity
     guid: 970cfbaa7369f9a48bac8a4fc26e094e
+  - enabled: 1
+    path: Assets/Scenes/DialogueScenes/FirstLevelClearD.unity
+    guid: 9463f42db634ccf459b7cc2d2c29f77e
+  - enabled: 1
+    path: Assets/Scenes/Levels/Level 2.unity
+    guid: abbe424b916461c42a450bad33fe80c9
+  - enabled: 1
+    path: Assets/Scenes/DialogueScenes/SecondLevelClearD.unity
+    guid: 4630c839567c3e844ae7984c5f7382c9
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 32668bd3630d31248a2af3f8d2c6e658, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

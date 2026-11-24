@@ -1,0 +1,8 @@
+﻿Name1|This is how you do the dialogue
+Name1|That is the next line
+<this is name>|<this is text - as simple as that>
+  Name2   | And don't bother removing leading or trailing spaces 
+  
+Name? | making some lines empty - they don't count
+Btw, that is how you make an empty line|
+|Or empty name no idea why you'd need such tho

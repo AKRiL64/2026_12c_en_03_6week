@@ -1,0 +1,10 @@
+﻿Captain|What is this place? And why can you talk?!
+Crab|Doesn't matter! What matters is I can help you find your crew.
+Captain|But how-
+Crab|For a small fee, of course! Every coin you find along the way goes to me. Deal?
+Captain|Every coin?! Why would I-
+Crab|Or you could wander around on your own. Getting lost is quite easy around here, you know.
+Narrator|...
+Captain|Fine. Deal. But make it quick.
+Crab|Wonderful! Follow me!
+Narrator|And so, two of you ventured deeper into the island.

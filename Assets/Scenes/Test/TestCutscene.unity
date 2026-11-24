@@ -308,64 +308,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &508103910
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 508103912}
-  - component: {fileID: 508103911}
-  m_Layer: 0
-  m_Name: ActionsDirector
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &508103911
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508103910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc93e99813b942658751774acd965f72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CutsceneActionDirector
-  dialogueActionsList:
-  - Index: 0
-    Action:
-      isNextLine: 1
-  - Index: 1
-    Action:
-      isNextLine: 1
-  - Index: 2
-    Action:
-      isNextLine: 1
-  - Index: 3
-    Action:
-      isNextLine: 1
-  nextScene: MainMenu
---- !u!4 &508103912
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 508103910}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 780.4959, y: 293.55347, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1118528216
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +319,7 @@ GameObject:
   - component: {fileID: 1118528219}
   - component: {fileID: 1118528218}
   - component: {fileID: 1118528217}
+  - component: {fileID: 1118528220}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -458,6 +401,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1118528220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1118528216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1188150794
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1188150796}
   - component: {fileID: 1188150795}
+  - component: {fileID: 1188150797}
   m_Layer: 0
   m_Name: DialogueDirector
   m_TagString: Untagged
@@ -487,8 +475,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e2f63fbef3c499d890baae834c7578e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneDialogueDirector
-  dialogueFile: {fileID: 4900000, guid: c7a08906b35e4cd792627d8e5d0dfca7, type: 3}
+  nextScene: Tutorial
+  dialogueFile: {fileID: 4900000, guid: 6326ddf53c5f4839b4b215360efc7891, type: 3}
   dialogueWindow: {fileID: 217079851}
+  input: {fileID: 1188150797}
 --- !u!4 &1188150796
 Transform:
   m_ObjectHideFlags: 0
@@ -504,6 +494,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1188150797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188150794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fedb08423c8eda844867f25401f8f73d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputHandler
 --- !u!1 &1201317693
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,4 +909,3 @@ SceneRoots:
   - {fileID: 1935172643}
   - {fileID: 1996507513}
   - {fileID: 1188150796}
-  - {fileID: 508103912}

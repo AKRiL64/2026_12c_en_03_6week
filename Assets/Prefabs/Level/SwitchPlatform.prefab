@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2672274080571546392}
   - component: {fileID: 3328206095170498794}
   - component: {fileID: 8099984087094041610}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: SwitchPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 672189531152599714}
   - component: {fileID: 4836082829077967310}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: VisualsOn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5317314904708957671}
   - component: {fileID: 140514190986155388}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: VisualsOff
   m_TagString: Untagged
   m_Icon: {fileID: 0}

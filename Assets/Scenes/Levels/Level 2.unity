@@ -184244,7 +184244,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 32
+      m_TileSpriteIndex: 39
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -199741,8 +199741,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -305443303, guid: 05c31211523847c47a5aeb52aa87e857, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 434
     m_Data: {fileID: -537263660, guid: 05c31211523847c47a5aeb52aa87e857, type: 3}
   - m_RefCount: 0
@@ -199755,8 +199755,8 @@ Tilemap:
     m_Data: {fileID: -1298461620, guid: 05c31211523847c47a5aeb52aa87e857, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -305443303, guid: 05c31211523847c47a5aeb52aa87e857, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 937357895, guid: 05c31211523847c47a5aeb52aa87e857, type: 3}
   - m_RefCount: 2
@@ -359077,7 +359077,7 @@ MonoBehaviour:
   m_RefResolutionX: 480
   m_RefResolutionY: 270
   m_CropFrame: 0
-  m_GridSnapping: 2
+  m_GridSnapping: 0
   m_FilterMode: 0
   m_UpscaleRT: 0
   m_PixelSnapping: 0

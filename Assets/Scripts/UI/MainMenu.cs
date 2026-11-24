@@ -51,7 +51,7 @@ public class MainMenu: MonoBehaviour
     {
         SaveManager.SaveFilename = newGameNameField.text;
         Debug.Log(SaveManager.SaveFilename);
-        SceneManager.LoadScene("Scenes/Levels/Tutorial");
+            SceneManager.LoadScene("IntroDialogue");
     }
 
     private void NewGameBackButton()

@@ -72,6 +72,14 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5272253455948872133, guid: a341e5cb648f7e143abaf405519ced70, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 1152
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272253455948872133, guid: a341e5cb648f7e143abaf405519ced70, type: 3}
+      propertyPath: unsafeGroundLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 5749518442455473659, guid: a341e5cb648f7e143abaf405519ced70, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2

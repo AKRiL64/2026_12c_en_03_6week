@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4867259375599806440}
   - component: {fileID: 4703910832990256108}
   - component: {fileID: 415359114753638624}
+  - component: {fileID: 5724671858027911080}
   m_Layer: 0
   m_Name: DynamicCamera
   m_TagString: MainCamera
@@ -154,3 +155,28 @@ MonoBehaviour:
   maxOffset: {x: 1, y: 1}
   dPlayer: 1
   dCamera: 9
+  smoothSpeed: 2
+--- !u!114 &5724671858027911080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2924842337205459029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.PixelPerfectCamera
+  m_ComponentVersion: 1
+  m_AssetsPPU: 32
+  m_RefResolutionX: 480
+  m_RefResolutionY: 270
+  m_CropFrame: 0
+  m_GridSnapping: 0
+  m_FilterMode: 0
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0

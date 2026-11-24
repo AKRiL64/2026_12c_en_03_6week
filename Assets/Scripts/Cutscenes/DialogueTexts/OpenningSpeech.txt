@@ -1,0 +1,18 @@
+﻿Narrator|Just another day at sea.
+Narrator|You and your crew are drinking, singing shanties, and celebrating your fifth year together.
+Chef|Am I not the finest cook on the seven seas? You're lucky to have me!
+Woodworker|HAHAHA! And who do you think built this beauty of a kitchen?
+Narrator|Just another day with the crew.
+Narrator|Until...
+Narrator|*Drip.*
+Narrator|*Drip. Drip.*
+Narrator|*CRASH!*
+Narrator|A storm! Out of nowhere!
+Narrator|You've weathered countless storms before, but never one like this.
+Navigator|LAND AHEAD!
+Narrator|An island! Right in their path!
+Narrator|There was no time to turn.
+Narrator|*BOOM!*
+Narrator|Darkness.
+Narrator|When you wake up, you're alone on an unfamiliar beach. A mountain blocks your way inland.
+Captain|I need to find my crew. Then we'll get out of here.

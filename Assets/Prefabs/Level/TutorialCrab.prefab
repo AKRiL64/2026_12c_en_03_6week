@@ -144,6 +144,7 @@ MonoBehaviour:
   defaultLayer: 0
   launchedProjectileLayer: 8
   flyDistance: 100
+  gravityScaleWhenLaunched: 1
   rotationSpeed: 1
   fierceToothToDisable: {fileID: 1715884291734832141}
 --- !u!50 &4365224313726868883
@@ -274,6 +275,34 @@ PrefabInstance:
     - target: {fileID: 4976914972163854339, guid: eafe400f51ea84292b09d33d5a4008d1, type: 3}
       propertyPath: m_Name
       value: DialogueBubble
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257374420762230068, guid: eafe400f51ea84292b09d33d5a4008d1, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 51e6ada518777e54f9bd0dbcee96d7c8, type: 2}
+    - target: {fileID: 8257374420762230068, guid: eafe400f51ea84292b09d33d5a4008d1, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257374420762230068, guid: eafe400f51ea84292b09d33d5a4008d1, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257374420762230068, guid: eafe400f51ea84292b09d33d5a4008d1, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257374420762230068, guid: eafe400f51ea84292b09d33d5a4008d1, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 3356567089146854727, guid: 51e6ada518777e54f9bd0dbcee96d7c8, type: 2}
+    - target: {fileID: 8257374420762230068, guid: eafe400f51ea84292b09d33d5a4008d1, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
+    - target: {fileID: 8257374420762230068, guid: eafe400f51ea84292b09d33d5a4008d1, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

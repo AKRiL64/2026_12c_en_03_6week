@@ -1,0 +1,19 @@
+﻿Crab|As usual, payment first!
+Captain|Still not a fan of this arrangement, but fine. Here you go.
+Narrator|Just around the corner, you find—
+Captain|Vik! Finally!
+Navigator|Glad to see you too, Captain! Shall we head back to the beach? I've already found a shortcut.
+Crab|Well, I guess this is where we part ways. Bye!
+Captain|Hold on! I've got an idea. Why don't you come with us?
+Narrator|And so, you all return to the beach, where Sam and Fred have just finished repairing the ship.
+Woodworker|Ready to set sail, Captain!
+Chef|And provisions are all stocked up!
+Captain|Excellent! Vik's here too, so we're all set.
+Captain|Oh, and there's one more thing. Meet our newest crewmate... and treasurer!
+Crab|WHAT?!
+Captain|Go on, introduce yourself.
+Captain|Chester...
+Everyone|Nice to meet you, Chester!
+Captain|Welcome aboard! Make yourself at home!
+Narrator|And so, the crew set sail once more, now with a new friend aboard.
+Narrator|Whatever adventures awaited them, they'd face them together!

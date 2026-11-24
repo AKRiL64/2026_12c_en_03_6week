@@ -112,6 +112,7 @@ MonoBehaviour:
   defaultLayer: 0
   launchedProjectileLayer: 8
   flyDistance: 100
+  gravityScaleWhenLaunched: 1
 --- !u!50 &9217163705070956791
 Rigidbody2D:
   serializedVersion: 5

@@ -1,0 +1,11 @@
+﻿Crab|Okie! We're almost at our first stop. But first, payment!
+Captain|Argh... A deal's a deal. Here you go.
+Crab|Wonderful! Now, have a look inside!
+Captain|Hmm... What's that smell?
+Captain|!!!
+Captain|Sam! Fred!
+Woodworker|Good to see you alive and well, Captain!
+Chef|Absolutely! Come on, join us while the food's still warm!
+Narrator|A makeshift kitchen in the middle of nowhere. Not quite what you expected, but the food was great.
+Narrator|After the meal, you ask Sam and Fred to return to the beach and start repairing the ship.
+Narrator|Meanwhile, you set off to find your last crewmate - Vik, the navigator.
