@@ -19,6 +19,8 @@ public abstract class BaseEnemy : MonoBehaviour
     [SerializeField] protected LayerMask playerLayer;
     [SerializeField] protected float detectionRange = 15f;
     [SerializeField] protected float forgetRange = 30f;
+    [SerializeField] protected int contactDamage = 1;
+    [SerializeField] protected float contactRadius = 0.6f;
 
     protected virtual void Awake()
     {
@@ -28,6 +30,11 @@ public abstract class BaseEnemy : MonoBehaviour
     protected virtual void Update()
     {
         UpdateState();
+    }
+    
+    protected virtual void FixedUpdate()
+    {
+        TryContactDamage();
     }
 
     protected virtual void UpdateState()
@@ -125,5 +132,20 @@ public abstract class BaseEnemy : MonoBehaviour
         if(collision.gameObject.CompareTag("Cannon") || collision.gameObject.CompareTag("Player"))
             return;
         state = EnemyState.Idle;
+    }
+
+    protected virtual void TryContactDamage()
+    {
+        if (state == EnemyState.Falling) return;
+
+        Collider2D hit = Physics2D.OverlapCircle(
+            transform.position,
+            contactRadius,
+            playerLayer
+        );
+        if (hit == null) return;
+
+        PlayerController player = hit.GetComponentInParent<PlayerController>();
+        if (player != null) player.TakeDamage(contactDamage);
     }
 }

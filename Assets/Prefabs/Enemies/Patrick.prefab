@@ -176,6 +176,7 @@ MonoBehaviour:
     m_Bits: 64
   detectionRange: 4
   forgetRange: 10
+  contactDamage: 1
   speed: 2
   groundLayer:
     serializedVersion: 2
@@ -215,4 +216,5 @@ MonoBehaviour:
   defaultLayer: 0
   launchedProjectileLayer: 8
   flyDistance: 100
+  gravityScaleWhenLaunched: 1
   rotationSpeed: 5

@@ -925,11 +925,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1840973717692189787, guid: 2ac7c4969aa10344a8ffc90c33cafaf4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.2
+      value: 8.5
       objectReference: {fileID: 0}
     - target: {fileID: 1840973717692189787, guid: 2ac7c4969aa10344a8ffc90c33cafaf4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 88.66
+      value: 101.4
       objectReference: {fileID: 0}
     - target: {fileID: 1840973717692189787, guid: 2ac7c4969aa10344a8ffc90c33cafaf4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -66173,7 +66173,7 @@ PrefabInstance:
     - target: {fileID: 8099984087094041610, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: onVisual
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2130968641}
     - target: {fileID: 8099984087094041610, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: assignedLever
       value: 
@@ -72981,7 +72981,7 @@ PrefabInstance:
     - target: {fileID: 8099984087094041610, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: onVisual
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2130968641}
     - target: {fileID: 8099984087094041610, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: assignedLever
       value: 
@@ -74322,6 +74322,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 6701982492342526377, guid: d6c322d28fd8e8847b5fac1b10cffb58, type: 3}
   m_PrefabInstance: {fileID: 1396387654}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1677917073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5833324612060003661, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
+  m_PrefabInstance: {fileID: 400757629}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1682809955
 GameObject:
@@ -77301,7 +77306,7 @@ PrefabInstance:
     - target: {fileID: 8099984087094041610, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: onVisual
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1677917073}
     - target: {fileID: 8099984087094041610, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
       propertyPath: assignedLever
       value: 
@@ -78880,6 +78885,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46da359cba6844d786c357d4dea978ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Lever
+--- !u!1 &2130968641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5833324612060003661, guid: e78c6a5e09eedca4786ba118f994f91b, type: 3}
+  m_PrefabInstance: {fileID: 899278064}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2138559816
 GameObject:
   m_ObjectHideFlags: 0

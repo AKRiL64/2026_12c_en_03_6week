@@ -34,7 +34,9 @@ public class PlayerController: MonoBehaviour
 
     //Hp system
     [SerializeField] private int MaxHp = 3;
+    [SerializeField] private float invincibilityTime = 1f;
     private int _currentHp;
+    private float _lastHitTime = -999f;
     
     //Spawning player on the last position he was on the ground in case of falling off into the water
     private Vector2 _lastPosition;
@@ -247,6 +249,9 @@ public class PlayerController: MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (Time.time < _lastHitTime + invincibilityTime) return;
+        _lastHitTime = Time.time;
+        
         RuntimeManager.PlayOneShot("event:/TAKE_DMG", transform.position);
         
         _currentHp = Math.Clamp(_currentHp - damage, 0, MaxHp);
