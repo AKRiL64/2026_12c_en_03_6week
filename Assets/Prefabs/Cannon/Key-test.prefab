@@ -85,8 +85,8 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 0.505315, b: 0, a: 1}
+  m_Sprite: {fileID: -855298285791758126, guid: d05f50db81b76364c84a068ebb7a4228, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -112,6 +112,7 @@ MonoBehaviour:
   defaultLayer: 0
   launchedProjectileLayer: 8
   flyDistance: 100
+  gravityScaleWhenLaunched: 1
 --- !u!114 &4650319596262173728
 MonoBehaviour:
   m_ObjectHideFlags: 0

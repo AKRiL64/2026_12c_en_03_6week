@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using FMODUnity;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -89,6 +90,12 @@ public class Cannon : MonoBehaviour
     {
         while (isPullHeld)
         {
+            if (!canSwallow)
+            {
+                yield return null;
+                continue;
+            }
+            
             _mousePosition = Camera.main.ScreenToWorldPoint(
                 Mouse.current.position.ReadValue()
             );
@@ -113,7 +120,7 @@ public class Cannon : MonoBehaviour
                     currentlyPulledCollider = null;
                 }
             }
-            else if (hit.collider != null && canSwallow)
+            else if (hit.collider != null)
             {
                 IPullable pullable = hit.collider.GetComponent<IPullable>();
 
@@ -150,18 +157,15 @@ public class Cannon : MonoBehaviour
     void CancelPulling(InputAction.CallbackContext ctx)
     {
         isPullHeld = false;
+        canSwallow = true;
+        
         currentlyPulledCollider = null;
         if (pullDetectionCoroutine != null)
         {
             StopCoroutine(pullDetectionCoroutine);
             pullDetectionCoroutine = null;
         }
-
-        if (!canSwallow)
-        {
-            canSwallow = true;
-        }
-
+        
         StopSuckEffects();
 
         OnPullableRelease?.Invoke();
@@ -205,6 +209,9 @@ public class Cannon : MonoBehaviour
         Follower follower = projectile.GetComponent<Follower>();
         
         PositionProjectile();
+        Collider2D proj = projectile.GetComponent<Collider2D>(); 
+        proj.excludeLayers |= LayerMask.GetMask("Player");
+        //add Player layer to exclude layers
         projectile.SetActive(true);
         projectile.GetComponent<Projectile>().Launch(launchForce);
         projectile = null;

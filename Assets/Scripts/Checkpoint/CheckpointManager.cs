@@ -14,7 +14,14 @@ public static class CheckpointManager
     public static void PutPlayerOnCheckpoint(int index)
     {
         if (_checkpoints.TryGetValue(index, out Vector3 position))
+        {
             _player.transform.position = position;
+            if (_player.TryGetComponent(out PlayerController controller))
+            {
+                controller.EnableCannon();
+            }
+        }
+            
         else
             _player.transform.position = Vector3.zero;
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7552115853841848890}
   - component: {fileID: 7653114197584777508}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: Visuals (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 2775019944017911884}
   - component: {fileID: 6564795332942815966}
   - component: {fileID: 5666846064693068519}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: JumpThroughPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
